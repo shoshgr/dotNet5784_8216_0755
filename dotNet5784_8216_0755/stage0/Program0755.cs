@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace stage0
 {
-    internal class Program
+    partial class Program
     {
+        static partial void welcome0755()
+        {
+            Console.WriteLine("Hi Shosh I'm here!!!");
+        }
     }
 }
