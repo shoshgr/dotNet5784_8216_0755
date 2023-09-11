@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
- using System;
+using System;
 namespace stage0
 {
     partial class Program
@@ -8,7 +8,7 @@ namespace stage0
         static void main(string[] args)
         {
             welcome8216();
-            welcom0755();
+            welcome0755();
             Console.ReadKey();
             
         }
@@ -18,6 +18,6 @@ namespace stage0
             string name = Console.ReadLine();
             Console.WriteLine("{0},welcome to my first console application",name);
         }
-        static partial void welcom0755();
+        static partial void welcome0755();
     }
 }
