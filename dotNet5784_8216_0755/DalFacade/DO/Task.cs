@@ -1,5 +1,4 @@
 ﻿
-//using System;
 namespace DO;
 /// <summary>
 /// Task Entity represents a task with all its props
