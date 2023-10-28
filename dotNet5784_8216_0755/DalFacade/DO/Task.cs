@@ -15,22 +15,22 @@ namespace DO;
 /// <param name="actual_end">the actual date of ending the task</param>
 /// <param name="product">description of the product</param>
 /// <param name="remarks">remarks on the task</param>
-/// <param name="engineer_id">the id of the task's engineer</param>
+/// <param name="engineer">the id of the task's engineer</param>
 /// <param name="level">the task dificulty level </param>
 
 public record Task
-{
-    int task_id;
-    string description;
-    string? nickname=" ";
-    bool milestone = false;
-    DateTime? production_date=null;
-    DateTime? start_date = null;
-    DateTime? final_date = null;
-    DateTime? estimated_end = null;
-    DateTime? actual_end = null;
-    string? product;
-    string? remarks;
-    int? engineer_id;
-    Task_level level;
-}
+(
+    int task_id,
+    string description,
+    Task_level level,
+    bool milestone = false,
+    DateTime? production_date=null,
+    DateTime? start_date = null,
+    DateTime? final_date = null,
+    DateTime? estimated_end = null,
+    DateTime? actual_end = null,
+    string? nickname = " ",
+    string? product="",
+    string? remarks="",
+    int? engineer=null
+);

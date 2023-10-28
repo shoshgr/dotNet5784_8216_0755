@@ -10,11 +10,15 @@
 /// <param name="task_name">the name of the current task</param>
 /// <param name="cost_per_hour">  cost per hour </param>
 public record Engineer
-{
-    int engineer_id;
-    string? name;
-    string email;
-    Engineer_degree degree;
-    string? task_name;
-    int cost_per_hour;
-}
+(
+    int engineer_id,
+    string? name,
+    string email,
+    Engineer_degree degree,
+    string? task_name,
+    int cost_per_hour,
+    bool is_active = false
+
+ );
+
+
