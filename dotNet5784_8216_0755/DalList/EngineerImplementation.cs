@@ -10,29 +10,34 @@ public class EngineerImplementation : IEngineer
     {
        if(DataSource.Engineers.Contains(item))
           throw new NotImplementedException();// צריך לזרוק שגיאה של :An engineer with this ID number already exists
-        DataSource.Engineers.Add(item);
-        return item.engineer_id;
+
+        Engineer new_engineer = item with { is_active = true }
+        DataSource.Engineers.Add(new_engineer);
+        return new_engineer.engineer_id;
     }
 
     public void Delete(int id)
     {
         throw new NotImplementedException();
-
+        if( DataSource.Engineers[index].is_active == false)
+            throw new NotImplementedException();// אולי לא צריך להתיחס למקרה זה 
+        Engineer new_engineer = DataSource.Engineers[index] with { is_active=true }
+        DataSource.Engineers.RemoveAt(index);
+        DataSource.Engineers.Add(new_engineer);
     }
 
     public Engineer? Read(int id)
     {
         int index = DataSource.Engineers.FindIndex(engineer => engineer.engineer_id == id);
-
-        if (index == -1)
+        if (index == -1|| DataSource.Engineers[index].is_active == false)
             return null;
         return DataSource.Engineers[index];
     }
 
     public List<Engineer> ReadAll()
     {
-        
-        return new List<Engineer>(DataSource.Engineers);
+        List<Engineer> engineers = new List<Engineer>(DataSource.Engineers.findAll(engineer => engineer.is_active == true));
+        return  engineers;
     }
 
     public void Update(Engineer item)
