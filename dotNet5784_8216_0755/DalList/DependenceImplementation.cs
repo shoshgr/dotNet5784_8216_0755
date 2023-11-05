@@ -9,13 +9,13 @@ public class DependenceImplementation : IDependence
     {
         int new_id = DataSource.Config.Next_dependence_id;
         Dependence new_item = item with { id = new_id };
-        DataSource.Dependences.Add(new_item);
+        DataSource.Dependences?.Add(new_item);
         return new_id;
     }
 
     public void Delete(int id)
     {
-        int index = DataSource.Dependences.FindIndex(dependence => dependence.id == id);
+        int index = DataSource.Dependences!.FindIndex(dependence => dependence.id == id);
         if (index == -1)
             throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
         DataSource.Dependences.RemoveAt(index);
@@ -23,7 +23,7 @@ public class DependenceImplementation : IDependence
 
     public Dependence? Read(int id)
     {
-        int index = DataSource.Dependences.FindIndex(dependence => dependence.id == id);
+        int index = DataSource.Dependences!.FindIndex(dependence => dependence.id == id);
         if (index == -1)
             return null;
         return DataSource.Dependences[index];
@@ -31,13 +31,13 @@ public class DependenceImplementation : IDependence
 
     public List<Dependence> ReadAll()
     {
-        return new List<Dependence>(DataSource.Dependences);
+        return new List<Dependence>(DataSource.Dependences!);
        
     }
 
     public void Update(Dependence item)
     {
-        int index = DataSource.Dependences.FindIndex(dependence => dependence.id == item.id);
+        int index = DataSource.Dependences!.FindIndex(dependence => dependence.id == item.id);
         if (index == -1)
             throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
         DataSource.Dependences.RemoveAt(index);

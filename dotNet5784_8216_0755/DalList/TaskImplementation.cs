@@ -42,4 +42,5 @@ public class TaskImplementation : ITask
         DataSource.Tasks.RemoveAt(index);
         DataSource.Tasks.Add(item);
     }
+
 }
