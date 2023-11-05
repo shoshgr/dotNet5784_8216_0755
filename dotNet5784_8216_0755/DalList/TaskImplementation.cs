@@ -9,13 +9,13 @@ public class TaskImplementation : ITask
     {
         int new_id = DataSource.Config.Next_task_id;
         Task new_item = item with { task_id = new_id };
-        DataSource.Tasks.Add(new_item);
+        DataSource.Tasks?.Add(new_item);
         return new_id;
     }
 
     public void Delete(int id)
     {
-        int index = DataSource.Tasks.FindIndex(task => task.task_id == id);
+        int index = DataSource.Tasks!.FindIndex(task => task.task_id == id);
         if (index == -1)
             throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
         DataSource.Tasks.RemoveAt(index);
@@ -23,7 +23,7 @@ public class TaskImplementation : ITask
 
     public Task? Read(int id)
     {
-       int index = DataSource.Tasks.FindIndex(task => task.task_id == id);
+       int index = DataSource.Tasks!.FindIndex(task => task.task_id == id);
                
         if (index == -1)
             return null;
@@ -32,11 +32,11 @@ public class TaskImplementation : ITask
 
     public List<Task> ReadAll()
     {
-        return new List<Task>(DataSource.Tasks);
+        return new List<Task>(DataSource.Tasks!);
     }
     public void Update(Task item)
     {
-        int index = DataSource.Tasks.FindIndex(task => task.task_id == item.task_id);
+        int index = DataSource.Tasks!.FindIndex(task => task.task_id == item.task_id);
         if(index == -1)
             throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
         DataSource.Tasks.RemoveAt(index);

@@ -12,13 +12,12 @@
 public record Engineer
 (
     int engineer_id,
-    string? name,
+    string name,
     string email,
     Engineer_degree degree,
-    string? task_name,
     int cost_per_hour,
     bool is_active = false
-
+   
  );
 
 

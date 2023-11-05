@@ -2,7 +2,7 @@
 
 using DalApi;
 using DO;
-//using System.Collections.Generic;
+using System.Collections.Generic;
 
 public class EngineerImplementation : IEngineer
 {
@@ -18,7 +18,9 @@ public class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-        throw new NotImplementedException();
+        int index = DataSource.Engineers.FindIndex(engineer => engineer.engineer_id == id);
+        if (index == -1)
+            throw new NotImplementedException();
         if( DataSource.Engineers[index].is_active == false)
             throw new NotImplementedException();// אולי לא צריך להתיחס למקרה זה 
         Engineer new_engineer = DataSource.Engineers[index] with { is_active=true }
