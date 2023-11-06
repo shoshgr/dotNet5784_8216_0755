@@ -348,7 +348,7 @@ namespace DalTest
             try
             {
                 int _id;
-                Console.WriteLine("enter engineer id");
+                Console.WriteLine("enter task id");
                 int.TryParse(Console.ReadLine(), out _id);
                 DO.Task? task = s_dalTask!.Read(_id);
                 Console.WriteLine(task);
@@ -358,9 +358,10 @@ namespace DalTest
                 string? _description = new_task.description != "" ? new_task.description : task.description;
                 string? _nickname = new_task.nickname != "" ? new_task.nickname : task.nickname;
                 string? _product = new_task.product != "" ? new_task.product : task.product;
+                
                 string? _remarks = new_task.remarks != "" ? new_task.remarks : task.remarks;
                 bool _milestone = new_task.milestone != null ? new_task.milestone : task.milestone;
-                DateTime _production_date = new_task.production_date != DateTime.MinValue ? new_task.production_date : task.production_date;
+                DateTime _production_date = new_task.production_date != null ? new_task.production_date : task.production_date;
                 DateTime _estimated_end = new_task.estimated_end != null ? new_task.estimated_end : task.estimated_end;
                 DateTime? _start_date = new_task.start_date != null ? new_task.start_date : task.start_date;
                 DateTime? _final_date = new_task.final_date != null ? new_task.final_date : task.final_date;
