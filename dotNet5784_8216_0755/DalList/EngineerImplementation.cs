@@ -23,7 +23,7 @@ public class EngineerImplementation : IEngineer
             throw new NotImplementedException();
         if( DataSource.Engineers[index].is_active == false)
             throw new NotImplementedException();// אולי לא צריך להתיחס למקרה זה 
-        Engineer new_engineer = DataSource.Engineers[index] with { is_active = true };
+        Engineer new_engineer = DataSource.Engineers[index] with { is_active = false };
         DataSource.Engineers.RemoveAt(index);
         DataSource.Engineers.Add(new_engineer);
     }

@@ -16,15 +16,18 @@ static public class Initialization
         string _description = "You haven't described the task yet";
         Task_level[] levels = { Task_level.Super_easy, Task_level.Easy, Task_level.Moderate, Task_level.Hard, Task_level.Challenge };
         Task_level _level;
-        DateTime _production_date;
-        DateTime _estimated_end;
+        
         for (int i = 0; i < 100;)
-        {
-            _production_date = new DateTime(s_rand.Next(2018, 2022), s_rand.Next(1, 12), s_rand.Next(1, 30));
+        { 
+           DateTime date = DateTime.Now;
+            DateTime _production_date = date.Add(TimeSpan.FromDays(-30));
+               // new DateTime(s_rand.Next(2018, 2022), s_rand.Next(1, 12), s_rand.Next(1, 30));
             _level = levels[s_rand.Next(0, 4)];
-            _estimated_end = new DateTime(_production_date.Year, _production_date.Month + s_rand.Next(1, ((int)_level)), _production_date.Day);
-            Task new_task = new(0, _description, _level, _production_date, _estimated_end, false);
+            DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5)); 
+                //new DateTime(_production_date.Year, _production_date.Month + s_rand.Next(1, 1+((int)_level)), _production_date.Day);
+            Task new_task = new (0, _description, _level, _production_date, _estimated_end, false);
             s_dalTask!.Create(new_task);
+            i++;
         }
     }
     private static void create_dependences()
@@ -42,6 +45,7 @@ static public class Initialization
                 _next_task = tasks[tasks.FindIndex(_task => _task.task_id == task.task_id) + i].task_id;
                 Dependence new_Dependence = new(0, _next_task, _prev_task);
                 s_dalDependence!.Create(new_Dependence);
+                i++;
             }
         }
     }
@@ -93,8 +97,8 @@ static public class Initialization
         s_dalTask = dalTask ?? throw new NullReferenceException(" DAL can not be null!");
         s_dalDependence = dalDependence ?? throw new NullReferenceException(" DAL can not be null!");
         s_dalEngineer = dalEngineer ?? throw new NullReferenceException(" DAL can not be null!");
-        create_dependences();
         create_tasks();
+        create_dependences();
         create_engineers();
     }
 }

@@ -32,7 +32,7 @@ public class TaskImplementation : ITask
 
     public List<Task> ReadAll()
     {
-        return new List<Task>(DataSource.Tasks!);
+        return new List<Task>(DataSource.Tasks);
     }
     public void Update(Task item)
     {
