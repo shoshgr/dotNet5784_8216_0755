@@ -90,7 +90,7 @@ namespace DalTest
         private static void task_menu()
         {
             Console.WriteLine("Select the method you want to perform:\r\n  1 create new task\r\n 2  read the  task by id \r\n 3 read all the objects of the task type \r\n 4 update the task\r\n 5 delete the task\r\n 0 exit menu");
-            string choice;
+            string? choice;
             choice = Console.ReadLine();
             switch (choice)
             {
@@ -210,9 +210,9 @@ namespace DalTest
         {
             int  _next_task, _prev_task;
             
-            Console.WriteLine("enter engineer next task id");
+            Console.WriteLine("enter next task id");
             int.TryParse(Console.ReadLine(), out _next_task);
-            Console.WriteLine("enter engineer  prev task id");
+            Console.WriteLine("enter  prev task id");
             int.TryParse(Console.ReadLine(), out _prev_task);
             
             DO.Dependence new_dependence = new(0,_next_task, _prev_task);
@@ -220,10 +220,10 @@ namespace DalTest
 
         }
         private static DO.Engineer get_engineer(bool update  = false) {
-            int _engineer_id = 0, _cost_per_hour,i;
-            string _name, _email;
-            Engineer_degree _degree;
-            Engineer_degree[] degrees = { Engineer_degree.Apprentice, Engineer_degree.Junior, Engineer_degree.Expert, Engineer_degree.Advanced }; 
+            int _engineer_id = 0, _cost_per_hour;
+            string _name, _email ;
+            Level _degree;
+            //Engineer_degree[] degrees = { Engineer_degree.Apprentice, Engineer_degree.Junior, Engineer_degree.Expert, Engineer_degree.Advanced }; 
             bool _is_active = true;
             if (!update)
             {
@@ -237,35 +237,34 @@ namespace DalTest
             Console.WriteLine("enter engineer cost per hour");
             int.TryParse(Console.ReadLine(), out _cost_per_hour);
             Console.WriteLine("enter engineer dgree");
-            int.TryParse(Console.ReadLine(), out i);
-            _degree = degrees[i];
+            Level.TryParse(Console.ReadLine(), out _degree);
+            
             DO.Engineer new_engineer = new(_engineer_id, _name, _email, _degree, _cost_per_hour,_is_active);
             return new_engineer;
 
         }
-        private static DO.Task get_task()
+        private static DO.Task get_task(bool update = false)
         {
 
-            int _engineer, i;
-            string ?_description, _nickname, _product, _remarks;
+            int _engineer;
+            string _description, _nickname, _product, _remarks ,mailston;
             DateTime _production_date, _estimated_end, _start_date, _final_date, _actual_end;
-            Task_level _level;
-            Task_level[] levels = { Task_level.Super_easy, Task_level.Easy, Task_level.Moderate, Task_level.Hard, Task_level.Challenge };
+            Level _level;
             bool _milestone;
+            Console.WriteLine("write a description");
+            _description = Console.ReadLine();
+            Console.WriteLine("enter nickname");
+            _nickname = Console.ReadLine()!;
             Console.WriteLine("enter engineer id");
             int.TryParse(Console.ReadLine(), out _engineer);
             //DO.Engineer? engineer = s_dalEngineer!.Read(_engineer);
             //if(engineer==null)
             //    Console.WriteLine("engineer is not found"); 
-            Console.WriteLine("write a description");
-            _description = Console.ReadLine();
-            Console.WriteLine("enter nickname");
-            _nickname = Console.ReadLine()!;
             Console.WriteLine("enter product");
             _product = Console.ReadLine();
             Console.WriteLine("enter remarks");
             _remarks = Console.ReadLine();
-            Console.WriteLine("enter Enter a production date in the form dd/mm/yy");
+            Console.WriteLine(" Enter a production date in the form dd/mm/yy");
             DateTime.TryParse(Console.ReadLine(), out _production_date);
             Console.WriteLine(" Enter a estimated end date in the form dd/mm/yy");
             DateTime.TryParse(Console.ReadLine(), out _estimated_end);
@@ -276,11 +275,19 @@ namespace DalTest
             Console.WriteLine("Enter a actual end date in the form dd/mm/yy");
             DateTime.TryParse(Console.ReadLine(), out _actual_end);
             Console.WriteLine("enter the task level");
-            int.TryParse(Console.ReadLine(), out i);
-            Console.WriteLine("enter _milestone");
-            bool.TryParse(Console.ReadLine(), out _milestone);
-            _level = levels[i];
-
+            Level.TryParse(Console.ReadLine(), out _level);
+            if (!update)
+            {
+                Console.WriteLine("enter yes or no if you have any  milestone");
+                mailston = Console.ReadLine();
+                _milestone = mailston == "yes" ? true : false;
+            }
+            else
+            {
+                Console.WriteLine("enter yes or no if you want to change the milestone status");
+                mailston = Console.ReadLine();
+                _milestone = mailston == "yes" ? true : false;
+            }
             DO.Task new_task = new(0, _description, _level, _production_date, _estimated_end, _milestone, _start_date, _final_date, _actual_end,
                    _nickname, _product, _remarks, _engineer);
             return new_task;
@@ -314,7 +321,7 @@ namespace DalTest
                 int _cost_per_hour = new_engineer.cost_per_hour != 0 ? new_engineer.cost_per_hour : engineer.cost_per_hour;
                 string _name = new_engineer.name != "" ? new_engineer.name : engineer.name;
                 string _email = new_engineer.email != "" ? new_engineer.email : engineer.email;
-                Engineer_degree _degree = new_engineer.degree != 0 ? new_engineer.degree : engineer.degree;
+                Level _degree = new_engineer.degree != 0 ? new_engineer.degree : engineer.degree;
                 DO.Engineer updated_engineer = new(_id, _name, _email, _degree, _cost_per_hour, _is_active);
                 s_dalEngineer!.Update(updated_engineer);
             }
@@ -351,24 +358,25 @@ namespace DalTest
                 Console.WriteLine("enter task id");
                 int.TryParse(Console.ReadLine(), out _id);
                 DO.Task? task = s_dalTask!.Read(_id);
-                Console.WriteLine(task);
-                DO.Task new_task = get_task();
-                Task_level _level = new_task.level != 0 ? new_task.level : task.level;
-                int? _engineer = new_task.engineer != 0 ? new_task.engineer : task.engineer;
-                string? _description = new_task.description != "" ? new_task.description : task.description;
-                string? _nickname = new_task.nickname != "" ? new_task.nickname : task.nickname;
-                string? _product = new_task.product != "" ? new_task.product : task.product;
+                    Console.WriteLine(task);
+                    DO.Task new_task = get_task();
+                Level _level = new_task.level != 0 ? new_task.level : task.level;
+                    int? _engineer = new_task.engineer != 0 ? new_task.engineer : task.engineer;
+                    string? _description = new_task.description != "" ? new_task.description : task.description;
+                    string? _nickname = new_task.nickname != "" ? new_task.nickname : task.nickname;
+                    string? _product = new_task.product != "" ? new_task.product : task.product;
+
+                    string? _remarks = new_task.remarks != "" ? new_task.remarks : task.remarks;
+                    bool _milestone = new_task.milestone == true ? !task.milestone : task.milestone;
+                    DateTime _production_date = new_task.production_date != DateTime.MinValue ? new_task.production_date : task.production_date;
+                    DateTime _estimated_end = new_task.estimated_end != DateTime.MinValue ? new_task.estimated_end : task.estimated_end;
+                    DateTime? _start_date = new_task.start_date != DateTime.MinValue ? new_task.start_date : task.start_date;
+                    DateTime? _final_date = new_task.final_date != DateTime.MinValue ? new_task.final_date : task.final_date;
+                    DateTime? _actual_end = new_task.actual_end != DateTime.MinValue ? new_task.actual_end : task.actual_end;
+                    DO.Task updated_task = new(_id, _description, _level, _production_date, _estimated_end, _milestone, _start_date, _final_date, _actual_end,
+                           _nickname, _product, _remarks, _engineer);
+                    s_dalTask!.Update(updated_task);
                 
-                string? _remarks = new_task.remarks != "" ? new_task.remarks : task.remarks;
-                bool _milestone = new_task.milestone != null ? new_task.milestone : task.milestone;
-                DateTime _production_date = new_task.production_date != null ? new_task.production_date : task.production_date;
-                DateTime _estimated_end = new_task.estimated_end != null ? new_task.estimated_end : task.estimated_end;
-                DateTime? _start_date = new_task.start_date != null ? new_task.start_date : task.start_date;
-                DateTime? _final_date = new_task.final_date != null ? new_task.final_date : task.final_date;
-                DateTime? _actual_end = new_task.actual_end != null ? new_task.actual_end : task.actual_end;
-                DO.Task updated_task = new(_id, _description, _level, _production_date, _estimated_end, _milestone, _start_date, _final_date, _actual_end,
-                       _nickname, _product, _remarks, _engineer);
-                s_dalTask!.Update(updated_task);
             }
             catch(Exception e)
             {

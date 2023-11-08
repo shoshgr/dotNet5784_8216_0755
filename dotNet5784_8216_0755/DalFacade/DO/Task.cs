@@ -22,14 +22,14 @@ public record Task
 (
     int task_id,
     string description,
-    Task_level level,
+    Level level,
     DateTime production_date,
     DateTime estimated_end ,
     bool milestone = false,
     DateTime? start_date = null,
     DateTime? final_date = null,
     DateTime? actual_end = null,
-    string? nickname = " ",
+    string? nickname = "",
     string? product="",
     string? remarks="",
     int? engineer=null

@@ -14,17 +14,15 @@ static public class Initialization
     private static void create_tasks()
     {
         string _description = "You haven't described the task yet";
-        Task_level[] levels = { Task_level.Super_easy, Task_level.Easy, Task_level.Moderate, Task_level.Hard, Task_level.Challenge };
-        Task_level _level;
+        Level[] levels = { Level.Novice, Level.Proficient, Level.AdvancedBeginner, Level.Competent,Level.Expert };
+       Level _level;
         
         for (int i = 0; i < 100;)
         { 
            DateTime date = DateTime.Now;
-            DateTime _production_date = date.Add(TimeSpan.FromDays(-30));
-               // new DateTime(s_rand.Next(2018, 2022), s_rand.Next(1, 12), s_rand.Next(1, 30));
+            DateTime _production_date = date.Add(TimeSpan.FromDays(-30)); 
             _level = levels[s_rand.Next(0, 4)];
             DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5)); 
-                //new DateTime(_production_date.Year, _production_date.Month + s_rand.Next(1, 1+((int)_level)), _production_date.Day);
             Task new_task = new (0, _description, _level, _production_date, _estimated_end, false);
             s_dalTask!.Create(new_task);
             i++;
@@ -61,8 +59,8 @@ static public class Initialization
         string _name;
         string _mail;
         int _cost;
-        Engineer_degree _degree;
-        Engineer_degree[] degrees = {  Engineer_degree.Apprentice , Engineer_degree.Junior, Engineer_degree.Expert, Engineer_degree.Advanced };
+        Level _degree;
+        Level[] degrees = { Level.Novice, Level.Proficient, Level.AdvancedBeginner, Level.Competent, Level.Expert };
         foreach (var name in Names)
         {
             do
@@ -70,23 +68,8 @@ static public class Initialization
             while (s_dalEngineer!.Read(_id) != null);
             _name = name;
             _mail = name + "@gmail.com";
-            _degree = degrees[s_rand.Next(0, 3)];
+            _degree = degrees[s_rand.Next(0, 4)];
             _cost = s_rand.Next(50, 200) * ((int)_degree) + s_rand.Next(50, 200);
-            //switch (_degree)
-            //{
-            //    case Engineer_degree.Apprentice:
-            //        _cost = s_rand.Next(50, 200);
-            //        break;
-            //    case Engineer_degree.Junior:
-            //        _cost = s_rand.Next(200, 500);
-            //        break;
-            //    case Engineer_degree.Expert:
-            //        _cost = s_rand.Next(500, 800);
-            //        break;
-            //    case Engineer_degree.Advanced:
-            //        _cost = s_rand.Next(800, 1000);
-            //        break;
-            //}
             Engineer new_engineer = new(_id, _name, _mail, _degree, _cost,true);
             s_dalEngineer!.Create(new_engineer);
         }
