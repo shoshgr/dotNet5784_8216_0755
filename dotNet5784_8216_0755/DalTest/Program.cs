@@ -9,9 +9,9 @@ namespace DalTest
     internal class Program
     {
 
-        private static ITask? s_dalTask = new TaskImplementation(); //stage 1
-        private static IEngineer? s_dalEngineer = new EngineerImplementation(); //stage 1
-        private static IDependence? s_dalDependence = new DependenceImplementation(); //stage 1  
+        private static ITask? s_dalTask = new TaskImplementation();
+        private static IEngineer? s_dalEngineer = new EngineerImplementation();
+        private static IDependence? s_dalDependence = new DependenceImplementation();
         private static void main_menu(string choice)
         {
             try
@@ -36,7 +36,9 @@ namespace DalTest
                 Console.WriteLine(e);
             }
         }
-        
+        /// <summary>
+        /// The functions <entity>_menu represent the menu of the specific entity
+        /// </summary>
         private static void engineer_menu()
         {
             Console.WriteLine("Select the method you want to perform:\r\n  1 create new engineer\r\n 2  read the  engineer by id \r\n 3 read all the objects of the engineer type \r\n 4 update the engineer\r\n 5 delete the engineer\r\n 0 exit menu");
@@ -112,13 +114,16 @@ namespace DalTest
 
             }
         }
+        /// <summary>
+        /// The functions read_<entitys> prints the entity list
+        /// </summary>
         private static void read_tasks()
         {
             List<DO.Task> tasks = s_dalTask!.ReadAll();
             int i = 1;
-            foreach(var task in tasks)
+            foreach (var task in tasks)
             {
-                Console.WriteLine("task number"+(i++)+ "\r\n"+task+ "\r\n"); 
+                Console.WriteLine("task number" + (i++) + "\r\n" + task + "\r\n");
             }
         }
         private static void read_dependences()
@@ -139,6 +144,9 @@ namespace DalTest
                 Console.WriteLine("engineer number" + (i++) + "\r\n" + engineer + "\r\n");
             }
         }
+        /// <summary>
+        /// The functions read_<entity> print the chosen entity by id
+        /// </summary>
         private static void read_engineer()
         {
             int _id;
@@ -155,15 +163,17 @@ namespace DalTest
             DO.Dependence? dependence = s_dalDependence!.Read(_id);
             Console.WriteLine(dependence);
         }
-
         private static void read_task()
         {
             int _id;
             Console.WriteLine("enter task id");
             int.TryParse(Console.ReadLine(), out _id);
             DO.Task? task = s_dalTask!.Read(_id);
-                Console.WriteLine(task);     
+            Console.WriteLine(task);
         }
+        /// <summary>
+        /// The functions delete_<entity> deletes the chosen entity by id
+        /// </summary>
         private static void delete_task()
         {
             try
@@ -206,24 +216,27 @@ namespace DalTest
                 Console.WriteLine(e);
             }
         }
+        /// <summary>
+        /// The functions get_<entity> gets the entity param from the user
+        /// </summary>
         private static DO.Dependence get_dependence()
         {
-            int  _next_task, _prev_task;
-            
+            int _next_task, _prev_task;
+
             Console.WriteLine("enter next task id");
             int.TryParse(Console.ReadLine(), out _next_task);
             Console.WriteLine("enter  prev task id");
             int.TryParse(Console.ReadLine(), out _prev_task);
-            
-            DO.Dependence new_dependence = new(0,_next_task, _prev_task);
+
+            DO.Dependence new_dependence = new(0, _next_task, _prev_task);
             return new_dependence;
 
         }
-        private static DO.Engineer get_engineer(bool update  = false) {
+        private static DO.Engineer get_engineer(bool update = false)
+        {
             int _engineer_id = 0, _cost_per_hour;
-            string _name, _email ;
+            string _name, _email;
             Level _degree;
-            //Engineer_degree[] degrees = { Engineer_degree.Apprentice, Engineer_degree.Junior, Engineer_degree.Expert, Engineer_degree.Advanced }; 
             bool _is_active = true;
             if (!update)
             {
@@ -231,23 +244,21 @@ namespace DalTest
                 int.TryParse(Console.ReadLine(), out _engineer_id);
             }
             Console.WriteLine("enter engineer name");
-           _name = Console.ReadLine();
+            _name = Console.ReadLine();
             Console.WriteLine("enter engineer email");
             _email = Console.ReadLine();
             Console.WriteLine("enter engineer cost per hour");
             int.TryParse(Console.ReadLine(), out _cost_per_hour);
             Console.WriteLine("enter engineer dgree");
             Level.TryParse(Console.ReadLine(), out _degree);
-            
-            DO.Engineer new_engineer = new(_engineer_id, _name, _email, _degree, _cost_per_hour,_is_active);
+            DO.Engineer new_engineer = new(_engineer_id, _name, _email, _degree, _cost_per_hour, _is_active);
             return new_engineer;
-
         }
         private static DO.Task get_task(bool update = false)
         {
 
             int _engineer;
-            string _description, _nickname, _product, _remarks ,mailston;
+            string _description, _nickname, _product, _remarks, mailston;
             DateTime _production_date, _estimated_end, _start_date, _final_date, _actual_end;
             Level _level;
             bool _milestone;
@@ -257,9 +268,6 @@ namespace DalTest
             _nickname = Console.ReadLine()!;
             Console.WriteLine("enter engineer id");
             int.TryParse(Console.ReadLine(), out _engineer);
-            //DO.Engineer? engineer = s_dalEngineer!.Read(_engineer);
-            //if(engineer==null)
-            //    Console.WriteLine("engineer is not found"); 
             Console.WriteLine("enter product");
             _product = Console.ReadLine();
             Console.WriteLine("enter remarks");
@@ -292,6 +300,9 @@ namespace DalTest
                    _nickname, _product, _remarks, _engineer);
             return new_task;
         }
+        /// <summary>
+        /// The functions create_<entity>  creates an entity with all is param which we got in the get functions
+        /// </summary>
         private static void create_engineer()
         {
             DO.Engineer new_engineer = get_engineer();
@@ -307,6 +318,9 @@ namespace DalTest
             DO.Task new_task = get_task();
             s_dalTask!.Create(new_task);
         }
+        /// <summary>
+        /// The functions update_<entity>  updates an entity by id with  get functions that takes the param to change
+        /// </summary>
         private static void update_engineer()
         {
             try
@@ -345,7 +359,7 @@ namespace DalTest
                 DO.Dependence updated_dependence = new(_id, _next_task, _prev_task);
                 s_dalDependence!.Update(updated_dependence);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -358,33 +372,32 @@ namespace DalTest
                 Console.WriteLine("enter task id");
                 int.TryParse(Console.ReadLine(), out _id);
                 DO.Task? task = s_dalTask!.Read(_id);
-                    Console.WriteLine(task);
-                    DO.Task new_task = get_task();
+                Console.WriteLine(task);
+                DO.Task new_task = get_task();
                 Level _level = new_task.level != 0 ? new_task.level : task.level;
-                    int? _engineer = new_task.engineer != 0 ? new_task.engineer : task.engineer;
-                    string? _description = new_task.description != "" ? new_task.description : task.description;
-                    string? _nickname = new_task.nickname != "" ? new_task.nickname : task.nickname;
-                    string? _product = new_task.product != "" ? new_task.product : task.product;
+                int? _engineer = new_task.engineer != 0 ? new_task.engineer : task.engineer;
+                string? _description = new_task.description != "" ? new_task.description : task.description;
+                string? _nickname = new_task.nickname != "" ? new_task.nickname : task.nickname;
+                string? _product = new_task.product != "" ? new_task.product : task.product;
 
-                    string? _remarks = new_task.remarks != "" ? new_task.remarks : task.remarks;
-                    bool _milestone = new_task.milestone == true ? !task.milestone : task.milestone;
-                    DateTime _production_date = new_task.production_date != DateTime.MinValue ? new_task.production_date : task.production_date;
-                    DateTime _estimated_end = new_task.estimated_end != DateTime.MinValue ? new_task.estimated_end : task.estimated_end;
-                    DateTime? _start_date = new_task.start_date != DateTime.MinValue ? new_task.start_date : task.start_date;
-                    DateTime? _final_date = new_task.final_date != DateTime.MinValue ? new_task.final_date : task.final_date;
-                    DateTime? _actual_end = new_task.actual_end != DateTime.MinValue ? new_task.actual_end : task.actual_end;
-                    DO.Task updated_task = new(_id, _description, _level, _production_date, _estimated_end, _milestone, _start_date, _final_date, _actual_end,
-                           _nickname, _product, _remarks, _engineer);
-                    s_dalTask!.Update(updated_task);
-                
+                string? _remarks = new_task.remarks != "" ? new_task.remarks : task.remarks;
+                bool _milestone = new_task.milestone == true ? !task.milestone : task.milestone;
+                DateTime _production_date = new_task.production_date != DateTime.MinValue ? new_task.production_date : task.production_date;
+                DateTime _estimated_end = new_task.estimated_end != DateTime.MinValue ? new_task.estimated_end : task.estimated_end;
+                DateTime? _start_date = new_task.start_date != DateTime.MinValue ? new_task.start_date : task.start_date;
+                DateTime? _final_date = new_task.final_date != DateTime.MinValue ? new_task.final_date : task.final_date;
+                DateTime? _actual_end = new_task.actual_end != DateTime.MinValue ? new_task.actual_end : task.actual_end;
+                DO.Task updated_task = new(_id, _description, _level, _production_date, _estimated_end, _milestone, _start_date, _final_date, _actual_end,
+                       _nickname, _product, _remarks, _engineer);
+                s_dalTask!.Update(updated_task);
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-                
-        }
 
+        }
         static void Main(string[] args)
         {
             Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependence);
@@ -393,17 +406,11 @@ namespace DalTest
             choice = Console.ReadLine();
             do
             {
-               main_menu(choice);
+                main_menu(choice);
                 Console.WriteLine("Choose which entity you want to check:\r\n  1 engineer\r\n 2  task\r\n 3 dependence\r\n 0 exit menu");
                 choice = Console.ReadLine();
-                
-            
             }
             while (choice != "0");
-
-            
         }
-
-
     }
 }
