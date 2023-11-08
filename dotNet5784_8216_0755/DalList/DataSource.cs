@@ -18,6 +18,7 @@ internal static class DataSource
 
     }
     internal static List<DO.Task> ?Tasks{ get; } = new(100);
+
     internal static List<DO.Engineer>? Engineers { get; } = new(40);
     internal static List<DO.Dependence>? Dependences { get; } = new(250);
 
