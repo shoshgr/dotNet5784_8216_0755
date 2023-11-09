@@ -5,12 +5,8 @@ using DO;
 
 static public class Initialization
 {
-
-    private static ITask? s_dalTask;
-    private static IDependence? s_dalDependence;
-    private static IEngineer? s_dalEngineer;
     private static readonly Random s_rand = new();
-  
+    private static IDal? s_dal;
     private static void create_tasks()
     {
         string _description = "You haven't described the task yet";
@@ -24,7 +20,7 @@ static public class Initialization
             _level = levels[s_rand.Next(0, 4)];
             DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5)); 
             Task new_task = new (0, _description, _level, _production_date, _estimated_end, false);
-            s_dalTask!.Create(new_task);
+            s_dal.task!.Create(new_task);
             i++;
         }
     }
@@ -32,7 +28,7 @@ static public class Initialization
     {
         int _next_task;
         int _prev_task;
-        List<Task> tasks = s_dalTask!.ReadAll();
+        List<Task> tasks = s_dal.task!.ReadAll();
         foreach (var task in tasks)
         {
             if (tasks.FindIndex(_task => _task.task_id == task.task_id) == tasks.Count - 4)
@@ -42,7 +38,7 @@ static public class Initialization
             {
                 _next_task = tasks[tasks.FindIndex(_task => _task.task_id == task.task_id) + i].task_id;
                 Dependence new_Dependence = new(0, _next_task, _prev_task);
-                s_dalDependence!.Create(new_Dependence);
+                s_dal.dependence!.Create(new_Dependence);
                 i++;
             }
         }
@@ -65,21 +61,19 @@ static public class Initialization
         {
             do
                 _id = s_rand.Next(1000, 9999);
-            while (s_dalEngineer!.Read(_id) != null);
+            while (s_dal.engineer!.Read(_id) != null);
             _name = name;
             _mail = name + "@gmail.com";
             _degree = degrees[s_rand.Next(0, 4)];
             _cost = s_rand.Next(50, 200) * ((int)_degree) + s_rand.Next(50, 200);
             Engineer new_engineer = new(_id, _name, _mail, _degree, _cost,true);
-            s_dalEngineer!.Create(new_engineer);
+            s_dal.engineer!.Create(new_engineer);
         }
     }
-    static readonly IEngineer? dalEngineer;
-    public static void Do (IEngineer? dalEngineer, ITask? dalTask, IDependence? dalDependence)
+    //static readonly IEngineer? dalEngineer;
+    public static void Do (IDal dal)
     {
-        s_dalTask = dalTask ?? throw new NullReferenceException(" DAL can not be null!");
-        s_dalDependence = dalDependence ?? throw new NullReferenceException(" DAL can not be null!");
-        s_dalEngineer = dalEngineer ?? throw new NullReferenceException(" DAL can not be null!");
+        s_dal = dal ?? throw new NullReferenceException(" DAL can not be null!");
         create_tasks();
         create_dependences();
         create_engineers();

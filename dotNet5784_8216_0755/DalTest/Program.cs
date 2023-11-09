@@ -8,10 +8,10 @@ namespace DalTest
 {
     internal class Program
     {
-
-        private static ITask? s_dalTask = new TaskImplementation();
-        private static IEngineer? s_dalEngineer = new EngineerImplementation();
-        private static IDependence? s_dalDependence = new DependenceImplementation();
+        //private static ITask? s_dalTask = new TaskImplementation();
+        //private static IEngineer? s_dalEngineer = new EngineerImplementation();
+        //private static IDependence? s_dalDependence = new DependenceImplementation();
+        private static readonly IDal s_dal = new DalList();
         private static void main_menu(string choice)
         {
             try
@@ -119,7 +119,7 @@ namespace DalTest
         /// </summary>
         private static void read_tasks()
         {
-            List<DO.Task> tasks = s_dalTask!.ReadAll();
+            List<DO.Task> tasks = s_dal.task!.ReadAll();
             int i = 1;
             foreach (var task in tasks)
             {
@@ -128,7 +128,7 @@ namespace DalTest
         }
         private static void read_dependences()
         {
-            List<DO.Dependence> dependences = s_dalDependence!.ReadAll();
+            List<DO.Dependence> dependences = s_dal.dependence!.ReadAll();
             int i = 1;
             foreach (var dependence in dependences)
             {
@@ -137,7 +137,7 @@ namespace DalTest
         }
         private static void read_engineers()
         {
-            List<DO.Engineer> engineers = s_dalEngineer!.ReadAll();
+            List<DO.Engineer> engineers = s_dal.engineer!.ReadAll();
             int i = 1;
             foreach (var engineer in engineers)
             {
@@ -152,7 +152,7 @@ namespace DalTest
             int _id;
             Console.WriteLine("enter engineer id");
             int.TryParse(Console.ReadLine(), out _id);
-            DO.Engineer? engineer = s_dalEngineer!.Read(_id);
+            DO.Engineer? engineer = s_dal.engineer!.Read(_id);
             Console.WriteLine(engineer);
         }
         private static void read_dependence()
@@ -160,7 +160,7 @@ namespace DalTest
             int _id;
             Console.WriteLine("enter dependence id");
             int.TryParse(Console.ReadLine(), out _id);
-            DO.Dependence? dependence = s_dalDependence!.Read(_id);
+            DO.Dependence? dependence = s_dal.dependence!.Read(_id);
             Console.WriteLine(dependence);
         }
         private static void read_task()
@@ -168,7 +168,7 @@ namespace DalTest
             int _id;
             Console.WriteLine("enter task id");
             int.TryParse(Console.ReadLine(), out _id);
-            DO.Task? task = s_dalTask!.Read(_id);
+            DO.Task? task = s_dal.task!.Read(_id);
             Console.WriteLine(task);
         }
         /// <summary>
@@ -181,7 +181,7 @@ namespace DalTest
                 int id;
                 Console.WriteLine("enter task id");
                 int.TryParse(Console.ReadLine(), out id);
-                s_dalTask!.Delete(id);
+                s_dal.task!.Delete(id);
             }
             catch (Exception e)
             {
@@ -195,7 +195,7 @@ namespace DalTest
                 int id;
                 Console.WriteLine("enter dependence id");
                 int.TryParse(Console.ReadLine(), out id);
-                s_dalDependence!.Delete(id);
+                s_dal.dependence!.Delete(id);
             }
             catch (Exception e)
             {
@@ -209,7 +209,7 @@ namespace DalTest
                 int id;
                 Console.WriteLine("enter engineer id");
                 int.TryParse(Console.ReadLine(), out id);
-                s_dalEngineer!.Delete(id);
+                s_dal.engineer!.Delete(id);
             }
             catch (Exception e)
             {
@@ -306,17 +306,17 @@ namespace DalTest
         private static void create_engineer()
         {
             DO.Engineer new_engineer = get_engineer();
-            s_dalEngineer!.Create(new_engineer);
+            s_dal.engineer!.Create(new_engineer);
         }
         private static void create_dependence()
         {
             DO.Dependence new_dependence = get_dependence();
-            s_dalDependence!.Create(new_dependence);
+            s_dal.dependence!.Create(new_dependence);
         }
         private static void create_task()
         {
             DO.Task new_task = get_task();
-            s_dalTask!.Create(new_task);
+            s_dal.task!.Create(new_task);
         }
         /// <summary>
         /// The functions update_<entity>  updates an entity by id with  get functions that takes the param to change
@@ -328,7 +328,7 @@ namespace DalTest
                 int _id;
                 Console.WriteLine("enter engineer id");
                 int.TryParse(Console.ReadLine(), out _id);
-                DO.Engineer? engineer = s_dalEngineer!.Read(_id);
+                DO.Engineer? engineer = s_dal.engineer!.Read(_id);
                 Console.WriteLine(engineer);
                 DO.Engineer new_engineer = get_engineer(true);
                 bool _is_active = true;
@@ -337,7 +337,7 @@ namespace DalTest
                 string _email = new_engineer.email != "" ? new_engineer.email : engineer.email;
                 Level _degree = new_engineer.degree != 0 ? new_engineer.degree : engineer.degree;
                 DO.Engineer updated_engineer = new(_id, _name, _email, _degree, _cost_per_hour, _is_active);
-                s_dalEngineer!.Update(updated_engineer);
+                s_dal.engineer!.Update(updated_engineer);
             }
             catch (Exception e)
             {
@@ -351,13 +351,13 @@ namespace DalTest
                 int _id;
                 Console.WriteLine("enter dependence id");
                 int.TryParse(Console.ReadLine(), out _id);
-                DO.Dependence? dependence = s_dalDependence!.Read(_id);
+                DO.Dependence? dependence = s_dal.dependence!.Read(_id);
                 Console.WriteLine(dependence);
                 DO.Dependence? new_dependence = get_dependence();
                 int _next_task = new_dependence.next_task != 0 ? new_dependence.next_task : dependence.next_task;
                 int _prev_task = new_dependence.prev_task != 0 ? new_dependence.prev_task : dependence.prev_task;
                 DO.Dependence updated_dependence = new(_id, _next_task, _prev_task);
-                s_dalDependence!.Update(updated_dependence);
+                s_dal.dependence!.Update(updated_dependence);
             }
             catch (Exception e)
             {
@@ -371,7 +371,7 @@ namespace DalTest
                 int _id;
                 Console.WriteLine("enter task id");
                 int.TryParse(Console.ReadLine(), out _id);
-                DO.Task? task = s_dalTask!.Read(_id);
+                DO.Task? task = s_dal.task!.Read(_id);
                 Console.WriteLine(task);
                 DO.Task new_task = get_task();
                 Level _level = new_task.level != 0 ? new_task.level : task.level;
@@ -389,7 +389,7 @@ namespace DalTest
                 DateTime? _actual_end = new_task.actual_end != DateTime.MinValue ? new_task.actual_end : task.actual_end;
                 DO.Task updated_task = new(_id, _description, _level, _production_date, _estimated_end, _milestone, _start_date, _final_date, _actual_end,
                        _nickname, _product, _remarks, _engineer);
-                s_dalTask!.Update(updated_task);
+                s_dal.task!.Update(updated_task);
 
             }
             catch (Exception e)
@@ -400,7 +400,7 @@ namespace DalTest
         }
         static void Main(string[] args)
         {
-            Initialization.Do(s_dalEngineer, s_dalTask, s_dalDependence);
+            Initialization.Do(s_dal);
             Console.WriteLine("Choose which entity you want to check:\r\n  1 engineer\r\n 2  task\r\n 3 dependence\r\n 0 exit menu");
             string? choice;
             choice = Console.ReadLine();
