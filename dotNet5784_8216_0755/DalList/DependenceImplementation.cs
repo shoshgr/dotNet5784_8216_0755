@@ -7,7 +7,6 @@ internal class DependenceImplementation : IDependence
 {
     public int Create(Dependence item)
     {
-
         int new_id = DataSource.Config.Next_dependence_id;
         Dependence new_item = item with { id = new_id };
         DataSource.Dependences?.Add(new_item);
