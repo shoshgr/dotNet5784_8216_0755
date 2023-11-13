@@ -8,9 +8,6 @@ namespace DalTest
 {
     internal class Program
     {
-        //private static ITask? s_dalTask = new TaskImplementation();
-        //private static IEngineer? s_dalEngineer = new EngineerImplementation();
-        //private static IDependence? s_dalDependence = new DependenceImplementation();
         private static readonly IDal s_dal = new DalList();
         private static void main_menu(string choice)
         {

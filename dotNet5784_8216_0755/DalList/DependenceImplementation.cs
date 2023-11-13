@@ -18,7 +18,7 @@ internal class DependenceImplementation : IDependence
     {
         var dependence = DataSource.Dependences!.FirstOrDefault(d => d.id == id);
         if (dependence == null)
-            throw new NotImplementedException(); // We need to add an exception that the dependency does not exist
+            throw new DalDoesNotExistException("A dependence with this ID number does not exists");
         DataSource.Dependences!.Remove(dependence);
     }
 
@@ -49,7 +49,7 @@ internal class DependenceImplementation : IDependence
     {
         var dependence = DataSource.Dependences!.FirstOrDefault(dependence => dependence.id == item.id);
         if (dependence == null)
-            throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
+            throw new DalDoesNotExistException("A dependence with this ID number does not exists");
         DataSource.Dependences!.Remove(dependence);
         DataSource.Dependences.Add(item);
     }

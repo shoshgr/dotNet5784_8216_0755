@@ -11,16 +11,15 @@ static public class Initialization
     private static void create_tasks()
     {
         string _description = "You haven't described the task yet";
-        
-       Level _level;
-        
+        Level _level;
+
         for (int i = 0; i < 100;)
-        { 
-           DateTime date = DateTime.Now;
+        {
+            DateTime date = DateTime.Now;
             DateTime _production_date = date.Add(TimeSpan.FromDays(-30));
             _level = (Level)s_rand.Next(0, 6);
-            DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5)); 
-            Task new_task = new (0, _description, _level, _production_date, _estimated_end, false);
+            DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5));
+            Task new_task = new(0, _description, _level, _production_date, _estimated_end, false);
             s_dal!.task!.Create(new_task);
             i++;
         }
@@ -29,7 +28,7 @@ static public class Initialization
     {
         int _next_task;
         int _prev_task;
-         List<Task> tasks = s_dal!.task!.ReadAll().ToList();
+        List<Task> tasks = s_dal!.task!.ReadAll().ToList();
         foreach (var task in tasks)
         {
             if (tasks.FindIndex(_task => _task.task_id == task.task_id) == tasks.Count - 4)
@@ -66,18 +65,17 @@ static public class Initialization
             _mail = name + "@gmail.com";
             _degree = (Level)s_rand.Next(0, 6);
             _cost = s_rand.Next(50, 200) * ((int)_degree) + s_rand.Next(50, 200);
-            Engineer new_engineer = new(_id, _name, _mail, _degree, _cost,true);
+            Engineer new_engineer = new(_id, _name, _mail, _degree, _cost, true);
             s_dal.engineer!.Create(new_engineer);
         }
     }
-    //static readonly IEngineer? dalEngineer;
-    public static void Do (IDal dal)
+    public static void Do(IDal dal)
     {
-        s_dal = dal ?? throw new NullReferenceException(" DAL can not be null!");
+        s_dal = dal ?? throw new NullReferenceException("DAL can not be null!");
         create_tasks();
         create_dependences();
         create_engineers();
     }
 }
-  
+
 

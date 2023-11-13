@@ -16,14 +16,13 @@ internal class TaskImplementation : ITask
     {
         Task? task = DataSource.Tasks.FirstOrDefault(task => task.task_id == id);
         if (task == null)
-            throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
+            throw new DalDoesNotExistException("A task with this ID number does not exists");  
         DataSource.Tasks!.Remove(task);
     }
 
     public Task? Read(int id)
     {
-        var task = DataSource.Tasks!.FirstOrDefault(task => task.task_id == id);
-               
+        var task = DataSource.Tasks!.FirstOrDefault(task => task.task_id == id); 
         if (task == null)
             return null;
         return task;
@@ -48,7 +47,7 @@ internal class TaskImplementation : ITask
     {
         var task = DataSource.Tasks!.FirstOrDefault(task => task.task_id == item.task_id);
         if(task == null)
-            throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
+            throw new DalDoesNotExistException("A task with this ID number does not exists"); 
         DataSource.Tasks!.Remove(task);
         DataSource.Tasks.Add(item);
     }

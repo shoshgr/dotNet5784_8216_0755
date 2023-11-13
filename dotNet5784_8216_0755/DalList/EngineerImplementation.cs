@@ -10,8 +10,7 @@ internal class EngineerImplementation : IEngineer
     {
         var engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer.engineer_id == item.engineer_id);
         if (engineer!= null)
-          throw new NotImplementedException();// צריך לזרוק שגיאה של :An engineer with this ID number already exists
-
+          throw new DalAlreadyExistsException("An engineer with this ID number already exists");
         Engineer new_engineer = item with { is_active = true };
         DataSource.Engineers?.Add(new_engineer);
         return new_engineer.engineer_id;
@@ -20,10 +19,8 @@ internal class EngineerImplementation : IEngineer
     public void Delete(int id)
     {
        var engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer.engineer_id == id);
-        if (engineer == null)
-            throw new NotImplementedException();
-        if(engineer.is_active == false)
-            throw new NotImplementedException();// אולי לא צריך להתיחס למקרה זה 
+        if (engineer == null|| engineer.is_active == false)
+            throw new DalDoesNotExistException("An engineer with this ID number does not exists");
         Engineer new_engineer = engineer with { is_active = false };
         DataSource.Engineers!.Remove(engineer);
         DataSource.Engineers.Add(new_engineer);
@@ -40,7 +37,7 @@ internal class EngineerImplementation : IEngineer
     {
         return DataSource.Engineers!.FirstOrDefault(filter);
     }
-    public  IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
+    public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
         if (filter != null)
         {
@@ -57,7 +54,7 @@ internal class EngineerImplementation : IEngineer
     {
         var engineer = DataSource.Engineers!.FirstOrDefault(engineer => engineer.engineer_id == item.engineer_id);
         if (engineer == null)
-            throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
+            throw new DalDoesNotExistException("An engineer with this ID number does not exists");
         DataSource.Engineers!.Remove(engineer);
         DataSource.Engineers.Add(item);
     }

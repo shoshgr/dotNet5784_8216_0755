@@ -7,7 +7,6 @@
 /// <param name="next_task">name of the Engineer</param>
 /// <param name="prev_task"> the engineer mail adress</param>
 
-
 public record Dependence
 (
     int id,
