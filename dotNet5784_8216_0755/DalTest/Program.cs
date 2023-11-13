@@ -1,8 +1,7 @@
 ﻿using DalApi;
 using Dal;
 using DO;
-using System.Reflection.Emit;
-using System.Xml.Linq;
+
 
 namespace DalTest
 {
@@ -397,17 +396,23 @@ namespace DalTest
         }
         static void Main(string[] args)
         {
-            Initialization.Do(s_dal);
-            Console.WriteLine("Choose which entity you want to check:\r\n  1 engineer\r\n 2  task\r\n 3 dependence\r\n 0 exit menu");
-            string? choice;
-            choice = Console.ReadLine();
-            do
+            try
             {
-                main_menu(choice);
+                Initialization.Do(s_dal);
                 Console.WriteLine("Choose which entity you want to check:\r\n  1 engineer\r\n 2  task\r\n 3 dependence\r\n 0 exit menu");
+                string? choice;
                 choice = Console.ReadLine();
+                do
+                {
+                    main_menu(choice);
+                    Console.WriteLine("Choose which entity you want to check:\r\n  1 engineer\r\n 2  task\r\n 3 dependence\r\n 0 exit menu");
+                    choice = Console.ReadLine();
+                }
+                while (choice != "0");
+            }catch(Exception e)
+            {
+                Console.WriteLine(e);
             }
-            while (choice != "0");
         }
     }
 }
