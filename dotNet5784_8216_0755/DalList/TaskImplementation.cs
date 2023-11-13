@@ -14,31 +14,38 @@ internal class TaskImplementation : ITask
 
     public void Delete(int id)
     {
-        int index = DataSource.Tasks!.FindIndex(task => task.task_id == id);
-        if (index == -1)
+        Task? task = DataSource.Tasks.FirstOrDefault(task => task.task_id == id);
+        if (task == null)
             throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
-        DataSource.Tasks.RemoveAt(index);
+        DataSource.Tasks!.Remove(task);
     }
 
     public Task? Read(int id)
     {
-       int index = DataSource.Tasks!.FindIndex(task => task.task_id == id);
+        var task = DataSource.Tasks!.FirstOrDefault(task => task.task_id == id);
                
-        if (index == -1)
+        if (task == null)
             return null;
-        return DataSource.Tasks[index];
+        return task;
     }
 
-    public List<Task> ReadAll()
+    public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
-        return new List<Task>(DataSource.Tasks);
+        if (filter != null)
+        {
+            return from task in DataSource.Tasks
+                   where filter(task) 
+                   select task;
+        }
+        return from task in DataSource.Tasks
+               select task;
     }
     public void Update(Task item)
     {
-        int index = DataSource.Tasks!.FindIndex(task => task.task_id == item.task_id);
-        if(index == -1)
+        var task = DataSource.Tasks!.FirstOrDefault(task => task.task_id == item.task_id);
+        if(task == null)
             throw new NotImplementedException(); // צריך להוסיף חריגה שהמשתמש אינו קיים 
-        DataSource.Tasks.RemoveAt(index);
+        DataSource.Tasks!.Remove(task);
         DataSource.Tasks.Add(item);
     }
 

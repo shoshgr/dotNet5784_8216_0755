@@ -119,7 +119,7 @@ namespace DalTest
         /// </summary>
         private static void read_tasks()
         {
-            List<DO.Task> tasks = s_dal.task!.ReadAll();
+            List<DO.Task> tasks = s_dal.task!.ReadAll().ToList();
             int i = 1;
             foreach (var task in tasks)
             {
@@ -128,7 +128,7 @@ namespace DalTest
         }
         private static void read_dependences()
         {
-            List<DO.Dependence> dependences = s_dal.dependence!.ReadAll();
+            List<DO.Dependence> dependences = s_dal.dependence!.ReadAll().ToList();
             int i = 1;
             foreach (var dependence in dependences)
             {
@@ -137,7 +137,7 @@ namespace DalTest
         }
         private static void read_engineers()
         {
-            List<DO.Engineer> engineers = s_dal.engineer!.ReadAll();
+            List<DO.Engineer> engineers = s_dal.engineer!.ReadAll().ToList();
             int i = 1;
             foreach (var engineer in engineers)
             {

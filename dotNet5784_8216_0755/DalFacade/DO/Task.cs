@@ -7,7 +7,7 @@ namespace DO;
 /// <param name="task_id">unique ID of task  </param>
 /// <param name="description">description of the task</param>
 /// <param name="nickname">Short name of the task</param>
-/// <param name="milestone">boolean flag, true if the task is active</param>
+/// <param name="milestone">boolean flag, true if the task has a milestone</param>
 /// <param name="production_date">production date of the task</param>
 /// <param name="start_date"> the date of starting the task</param>
 /// <param name="final_date">the final date of ending the task</param>

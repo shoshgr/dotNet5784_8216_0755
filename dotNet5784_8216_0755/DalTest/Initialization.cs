@@ -3,6 +3,7 @@
 using DalApi;
 using DO;
 
+
 static public class Initialization
 {
     private static readonly Random s_rand = new();
@@ -10,17 +11,17 @@ static public class Initialization
     private static void create_tasks()
     {
         string _description = "You haven't described the task yet";
-        Level[] levels = { Level.Novice, Level.Proficient, Level.AdvancedBeginner, Level.Competent,Level.Expert };
+        
        Level _level;
         
         for (int i = 0; i < 100;)
         { 
            DateTime date = DateTime.Now;
-            DateTime _production_date = date.Add(TimeSpan.FromDays(-30)); 
-            _level = levels[s_rand.Next(0, 4)];
+            DateTime _production_date = date.Add(TimeSpan.FromDays(-30));
+            _level = (Level)s_rand.Next(0, 6);
             DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5)); 
             Task new_task = new (0, _description, _level, _production_date, _estimated_end, false);
-            s_dal.task!.Create(new_task);
+            s_dal!.task!.Create(new_task);
             i++;
         }
     }
@@ -28,7 +29,7 @@ static public class Initialization
     {
         int _next_task;
         int _prev_task;
-        List<Task> tasks = s_dal.task!.ReadAll();
+         List<Task> tasks = s_dal!.task!.ReadAll().ToList();
         foreach (var task in tasks)
         {
             if (tasks.FindIndex(_task => _task.task_id == task.task_id) == tasks.Count - 4)
@@ -56,15 +57,14 @@ static public class Initialization
         string _mail;
         int _cost;
         Level _degree;
-        Level[] degrees = { Level.Novice, Level.Proficient, Level.AdvancedBeginner, Level.Competent, Level.Expert };
         foreach (var name in Names)
         {
             do
                 _id = s_rand.Next(1000, 9999);
-            while (s_dal.engineer!.Read(_id) != null);
+            while (s_dal!.engineer!.Read(_id) != null);
             _name = name;
             _mail = name + "@gmail.com";
-            _degree = degrees[s_rand.Next(0, 4)];
+            _degree = (Level)s_rand.Next(0, 6);
             _cost = s_rand.Next(50, 200) * ((int)_degree) + s_rand.Next(50, 200);
             Engineer new_engineer = new(_id, _name, _mail, _degree, _cost,true);
             s_dal.engineer!.Create(new_engineer);
