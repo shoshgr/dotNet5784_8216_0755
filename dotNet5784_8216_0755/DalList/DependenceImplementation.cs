@@ -29,7 +29,10 @@ internal class DependenceImplementation : IDependence
             return null;
         return dependence;
     }
-
+    public Dependence? Read(Func<Dependence, bool> filter)
+    {
+        return DataSource.Dependences!.FirstOrDefault(filter);
+    }
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
     {
         if (filter != null)
@@ -40,7 +43,6 @@ internal class DependenceImplementation : IDependence
         }
         return from dependence in DataSource.Dependences
                select dependence;
-
     }
 
     public void Update(Dependence item)

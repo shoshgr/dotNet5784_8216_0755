@@ -36,7 +36,10 @@ internal class EngineerImplementation : IEngineer
             return null;
         return engineer;
     }
-
+    public Engineer? Read(Func<Engineer, bool> filter)
+    {
+        return DataSource.Engineers!.FirstOrDefault(filter);
+    }
     public  IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
         if (filter != null)

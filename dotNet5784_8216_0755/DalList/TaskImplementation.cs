@@ -28,6 +28,10 @@ internal class TaskImplementation : ITask
             return null;
         return task;
     }
+    public Task? Read(Func<Task, bool> filter)
+    {
+        return DataSource.Tasks!.FirstOrDefault(filter);
+    }
 
     public IEnumerable<Task?> ReadAll(Func<Task, bool>? filter = null)
     {
