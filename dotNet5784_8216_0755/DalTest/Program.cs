@@ -7,7 +7,7 @@ namespace DalTest
 {
     internal class Program
     {
-        private static readonly IDal s_dal = new DalList();
+        private static readonly IDal s_dal = new DalXml();
         private static void main_menu(string choice)
         {
             try
@@ -398,7 +398,7 @@ namespace DalTest
         {
             try
             {
-                Initialization.Do(s_dal);
+                //Initialization.Do(s_dal);
                 Console.WriteLine("Choose which entity you want to check:\r\n  1 engineer\r\n 2  task\r\n 3 dependence\r\n 0 exit menu");
                 string? choice;
                 choice = Console.ReadLine();

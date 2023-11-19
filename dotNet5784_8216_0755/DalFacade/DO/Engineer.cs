@@ -16,7 +16,10 @@ public record Engineer
     string email,
     Level degree,
     int cost_per_hour,
-    bool is_active = false 
- );
+    bool is_active = false
+)
+{
+    public Engineer() : this(0, "","", 0, 0) { }
+}
 
 

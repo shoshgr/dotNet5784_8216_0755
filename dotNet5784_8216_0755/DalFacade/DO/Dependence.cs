@@ -12,4 +12,7 @@ public record Dependence
     int id,
     int next_task,
     int prev_task
-);
+)
+{
+    public Dependence() : this(0,0,0) { }
+}

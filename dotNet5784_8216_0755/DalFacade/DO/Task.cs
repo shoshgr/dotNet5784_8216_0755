@@ -33,4 +33,8 @@ public record Task
     string? product="",
     string? remarks="",
     int? engineer=null
-);
+)
+{
+    public Task() : this(0, "", 0, DateTime.MinValue, DateTime.MinValue) { }
+}
+
