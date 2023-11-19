@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineers>
+	<engineer>
+		<engineer_id>0</engineer_id>
+		<name>s</name>
+		<email>s@</email>
+		<degree>0</degree>
+		<cost_per_hour>2</cost_per_hour>
+		<is_active>true</is_active>
+	</engineer>
 </ArrayOfEngineers>

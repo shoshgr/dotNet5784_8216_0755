@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDependences>
-	<dependence></dependence>
+	<dependence>
+		<id>0</id>
+		<next_task>3</next_task>
+		<prev_task>2</prev_task>
+	</dependence>
 </ArrayOfDependences>
