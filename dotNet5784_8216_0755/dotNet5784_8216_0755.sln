@@ -5,11 +5,21 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "stage0", "stage0\stage0.csproj", "{0B945CF9-26E5-44E6-A7FC-9EB0747D74AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacade\DalFacade.csproj", "{E713DAFA-41FA-4B86-91C8-1BFC769D59A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalFacade", "DalFacade\DalFacade.csproj", "{E713DAFA-41FA-4B86-91C8-1BFC769D59A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalList", "DalList\DalList.csproj", "{EB8930B5-6D7F-4C90-B2B4-2164107EF5BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalList", "DalList\DalList.csproj", "{EB8930B5-6D7F-4C90-B2B4-2164107EF5BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalTest", "DalTest\DalTest.csproj", "{23B4AAF7-7112-4A3C-8565-98C2354204E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalTest", "DalTest\DalTest.csproj", "{23B4AAF7-7112-4A3C-8565-98C2354204E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalXml", "DalXml\DalXml.csproj", "{C07B1115-D2A9-4390-8C5C-92A920947EA6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{1FB2DFB2-5F02-4582-878F-87E1BDB8D4E9}"
+	ProjectSection(SolutionItems) = preProject
+		xml\data-config.xml = xml\data-config.xml
+		xml\dependences.xml = xml\dependences.xml
+		xml\engineers.xml = xml\engineers.xml
+		xml\tasks.xml = xml\tasks.xml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +43,10 @@ Global
 		{23B4AAF7-7112-4A3C-8565-98C2354204E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{23B4AAF7-7112-4A3C-8565-98C2354204E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{23B4AAF7-7112-4A3C-8565-98C2354204E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C07B1115-D2A9-4390-8C5C-92A920947EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C07B1115-D2A9-4390-8C5C-92A920947EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C07B1115-D2A9-4390-8C5C-92A920947EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C07B1115-D2A9-4390-8C5C-92A920947EA6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
