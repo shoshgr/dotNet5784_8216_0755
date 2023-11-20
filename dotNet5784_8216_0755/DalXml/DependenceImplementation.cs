@@ -1,6 +1,7 @@
 ﻿
 using DalApi;
 using DO;
+using System.Drawing;
 using System.Xml.Linq;
 namespace Dal;
 
@@ -25,7 +26,7 @@ internal class DependenceImplementation : IDependence
 
     public void Delete(int id)
     {
-        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Attribute("id") == id);
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Element("id") ==  id);
         if (dependence == null)
         {
             throw new DalDoesNotExistException("A dependence with this ID number does not exist");
@@ -36,8 +37,8 @@ internal class DependenceImplementation : IDependence
     }
 
     public Dependence? Read(int id)
-    { 
-        XElement? dependence = xml.Descendants("dependence").FirstOrDefault(d => (int)d.Attribute("id") == id);
+    {
+        XElement? dependence = xml.Elements("Dependence").FirstOrDefault(d => (int)d.Element("id") == id);
         if (dependence == null)
             return null;
 
@@ -46,7 +47,7 @@ internal class DependenceImplementation : IDependence
 
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        XElement? dependence = xml.Descendants("dependence").FirstOrDefault(x => filter(x.ToEntity<Dependence>()));
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(x => filter(x.ToEntity<Dependence>()));
         if (dependence == null)
             return null;
         return dependence.ToEntity<Dependence>();
@@ -62,11 +63,16 @@ internal class DependenceImplementation : IDependence
 
     public void Update(Dependence item)
     {
-        XElement? dependence = xml.Descendants("dependence").FirstOrDefault(d => (int)d.Attribute("id") == item.id);
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Element("id") == item.id);
         if (dependence == null)
             throw new DalDoesNotExistException("A dependence with this ID number does not exists");
         dependence.Remove();
-        xml.Add(dependence);
+        XElement _item = new XElement("Dependence",
+              new XElement("next_task", item.next_task),
+              new XElement("prev_task", item.prev_task),
+              new XElement("id", item.id)
+          );
+        xml.Add(_item);
         xml.Save(FILENAME);
     }
 }
