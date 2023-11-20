@@ -252,7 +252,6 @@ namespace DalTest
         }
         private static DO.Task get_task(bool update = false)
         {
-
             int _engineer;
             string _description, _nickname, _product, _remarks, mailston;
             DateTime _production_date, _estimated_end, _start_date, _final_date, _actual_end;
@@ -326,8 +325,14 @@ namespace DalTest
                 int.TryParse(Console.ReadLine(), out _id);
                 DO.Engineer? engineer = s_dal.engineer!.Read(_id);
                 Console.WriteLine(engineer);
-                DO.Engineer new_engineer = get_engineer(true);
                 bool _is_active = true;
+                if (engineer.is_active==false)
+                {
+                    Console.WriteLine("do you want to active the engineer? y/n");
+                    string answer = Console.ReadLine();
+                    _is_active = answer == "y" ? true : false;
+                }
+                DO.Engineer new_engineer = get_engineer(true);
                 int _cost_per_hour = new_engineer.cost_per_hour != 0 ? new_engineer.cost_per_hour : engineer.cost_per_hour;
                 string _name = new_engineer.name != "" ? new_engineer.name : engineer.name;
                 string _email = new_engineer.email != "" ? new_engineer.email : engineer.email;

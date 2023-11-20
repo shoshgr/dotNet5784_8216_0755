@@ -6,14 +6,13 @@ namespace Dal;
 
 internal class DependenceImplementation : IDependence
 {
-    string FILENAME = "dependence.xml";
+    string FILENAME = @"../xml/dependences.xml";
+    XElement xml = XElement.Load("../xml/dependences.xml");
 
-    XElement xml = XElement.Load("dependence.xml");
     public int Create(Dependence item)
     {
-        
         int new_id = Config.NextDependenceId;
-        XElement dependence = new XElement("dependence",
+        XElement dependence = new XElement("Dependence",
             new XElement("next_task", item.next_task),
             new XElement("prev_task", item.prev_task),
             new XElement("id",new_id )   
@@ -26,9 +25,7 @@ internal class DependenceImplementation : IDependence
 
     public void Delete(int id)
     {
-      
-      
-        XElement? dependence = xml.Descendants("dependence").FirstOrDefault(d => (int)d.Attribute("id") == id);
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Attribute("id") == id);
         if (dependence == null)
         {
             throw new DalDoesNotExistException("A dependence with this ID number does not exist");
@@ -39,9 +36,7 @@ internal class DependenceImplementation : IDependence
     }
 
     public Dependence? Read(int id)
-    {
-
-      
+    { 
         XElement? dependence = xml.Descendants("dependence").FirstOrDefault(d => (int)d.Attribute("id") == id);
         if (dependence == null)
             return null;

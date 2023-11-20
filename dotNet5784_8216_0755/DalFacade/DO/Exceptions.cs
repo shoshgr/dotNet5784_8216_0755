@@ -25,3 +25,8 @@ public class DalXMLFileLoadCreateException : Exception
 {
     public DalXMLFileLoadCreateException(string? message) : base(message) { }
 }
+
+public class DalAlreadyExistsNotActiveException : Exception
+{
+    public DalAlreadyExistsNotActiveException(string? message) : base(message) { }
+}
