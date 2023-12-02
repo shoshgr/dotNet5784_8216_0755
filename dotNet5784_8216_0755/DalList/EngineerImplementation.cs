@@ -7,7 +7,7 @@ internal class EngineerImplementation : IEngineer
 {
     public int Create(Engineer item)
     {
-        var engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer.engineer_id == item.engineer_id);
+        var engineer = DataSource.Engineers?.FirstOrDefault(engineer => engineer.engineer_id == item.engineer_id);
         if (engineer!= null)
           throw new DalAlreadyExistsException("An engineer with this ID number already exists");
         Engineer new_engineer = item with { is_active = true };
@@ -17,7 +17,7 @@ internal class EngineerImplementation : IEngineer
 
     public void Delete(int id)
     {
-       var engineer = DataSource.Engineers.FirstOrDefault(engineer => engineer.engineer_id == id);
+       var engineer = DataSource.Engineers?.FirstOrDefault(engineer => engineer.engineer_id == id);
         if (engineer == null|| engineer.is_active == false)
             throw new DalDoesNotExistException("An engineer with this ID number does not exists");
         Engineer new_engineer = engineer with { is_active = false };

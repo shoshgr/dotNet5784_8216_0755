@@ -10,7 +10,7 @@
     <prev_task>5</prev_task>
     <id>1</id>
   </Dependence>
-	<Dependence>
+  <Dependence>
     <next_task>7</next_task>
     <prev_task>6</prev_task>
     <id>2</id>
@@ -21,7 +21,7 @@
     <id>3</id>
   </Dependence>
   <Dependence>
-    <next_task>1</next_task>
+    <next_task>2</next_task>
     <prev_task>1</prev_task>
     <id>4</id>
   </Dependence>

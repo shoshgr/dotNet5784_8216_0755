@@ -5,6 +5,8 @@ using System.Drawing;
 using System.Xml.Linq;
 namespace Dal;
 
+//The function ToDependence that being used in this file is declared in XMLtools.cs
+
 internal class DependenceImplementation : IDependence
 {
     string FILENAME = @"../xml/dependences.xml";
@@ -38,26 +40,26 @@ internal class DependenceImplementation : IDependence
 
     public Dependence? Read(int id)
     {
-        XElement? dependence = xml.Elements("Dependence").FirstOrDefault(d => (int)d.Element("id") == id);
+        XElement? dependence = xml.Elements("Dependence").FirstOrDefault(d => (int)d?.Element("id") == id);
         if (dependence == null)
             return null;
 
-        return dependence.ToEntity<Dependence>();
+        return dependence.ToDependence();
     }
 
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(x => filter(x.ToEntity<Dependence>()));
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(x => filter(x.ToDependence()));
         if (dependence == null)
             return null;
-        return dependence.ToEntity<Dependence>();
+        return dependence.ToDependence();
     }
 
     public IEnumerable<Dependence?> ReadAll(Func<Dependence, bool>? filter = null)
     {
         if (filter is null)
-            return xml.Descendants("Dependence").Select(el => el.ToEntity<Dependence>());
-        return xml.Descendants("Dependence").Where(el => filter(el?.ToEntity<Dependence>())).Select(el => el.ToEntity<Dependence>());         
+            return xml.Descendants("Dependence").Select(el => el.ToDependence());
+        return xml.Descendants("Dependence").Where(el => filter(el.ToDependence())).Select(el => el.ToDependence());         
     }
 
 

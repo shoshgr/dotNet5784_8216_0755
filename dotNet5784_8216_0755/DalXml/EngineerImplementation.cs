@@ -1,8 +1,5 @@
-﻿
-
-using DalApi;
+﻿using DalApi;
 using DO;
-
 using System.Xml.Serialization;
 
 namespace Dal;
@@ -12,29 +9,21 @@ internal class EngineerImplementation : IEngineer
     string FILENAME = @"../xml/engineers.xml";
     public int Create(Engineer item)
     {
-        //XmlSerializer serializer = new XmlSerializer(typeof(List<Engineer>));
-        //StreamReader reader = new(FILENAME);
-        //var engineers = (List<Engineer>?)serializer.Deserialize(reader);
-        //reader.Close();
-        List<Engineer>? engineers = XMLTools.LoadListFromXMLSerializer<Engineer?>("engineers");
+        List<Engineer>? engineers = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         Engineer? engineer = engineers?.FirstOrDefault(engineer => engineer.engineer_id == item.engineer_id);
         if (engineer != null && engineer.is_active == false)
             throw new DalAlreadyExistsNotActiveException("An engineer with this ID number already exists but is not active");
         if (engineer != null)
-           throw new DalAlreadyExistsException("An engineer with this ID number already exists");
+            throw new DalAlreadyExistsException("An engineer with this ID number already exists");
         Engineer new_engineer = item with { is_active = true };
         engineers?.Add(new_engineer);
-        XMLTools.SaveListToXMLSerializer(engineers, "engineers");
-        //StreamWriter writer = new StreamWriter(FILENAME);
-        //serializer.Serialize(writer, engineers);
-        //writer.Close();
+        XMLTools.SaveListToXMLSerializer(engineers!, "engineers");
         return new_engineer.engineer_id;
     }
 
     public void Delete(int id)
     {
-
-        List<Engineer>? engineers = XMLTools.LoadListFromXMLSerializer<Engineer?>("engineers");
+        List<Engineer>? engineers = XMLTools.LoadListFromXMLSerializer<Engineer>("engineers");
         Engineer? engineer = engineers?.FirstOrDefault(engineer => engineer.engineer_id == id);
         if (engineer == null || engineer.is_active == false)
             throw new DalDoesNotExistException("An engineer with this ID number does not exists");
@@ -67,7 +56,6 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<Engineer?> ReadAll(Func<Engineer, bool>? filter = null)
     {
-
         XmlSerializer serializer = new XmlSerializer(typeof(List<Engineer>));
         StreamReader reader = new StreamReader(FILENAME);
         List<Engineer>? engineers = (List<Engineer>?)serializer.Deserialize(reader);

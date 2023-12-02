@@ -29,15 +29,15 @@ static public class Initialization
     {
         int _next_task;
         int _prev_task;
-        List<Task> tasks = s_dal!.task!.ReadAll().ToList();
+        List<Task?> tasks = s_dal!.task!.ReadAll().ToList();
         foreach (var task in tasks)
         {
-            if (tasks.FindIndex(_task => _task.task_id == task.task_id) == tasks.Count - 4)
+            if (tasks.FindIndex(_task => _task?.task_id == task?.task_id) == tasks.Count - 4)
                 break;
-            _prev_task = task.task_id;
+            _prev_task = task!.task_id;
             for (int i = 1; i < 4;)
             {
-                _next_task = tasks[tasks.FindIndex(_task => _task.task_id == task.task_id) + i].task_id;
+                _next_task = tasks[tasks.FindIndex(_task => _task?.task_id == task?.task_id) + i].task_id;
                 Dependence new_Dependence = new(0, _next_task, _prev_task);
                 s_dal.dependence!.Create(new_Dependence);
                 i++;

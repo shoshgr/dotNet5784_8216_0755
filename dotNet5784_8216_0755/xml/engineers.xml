@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
-    <engineer_id>4</engineer_id>
-    <name>4</name>
-    <email>4</email>
-    <degree>Expert</degree>
-    <cost_per_hour>4</cost_per_hour>
+    <engineer_id>1</engineer_id>
+    <name>1</name>
+    <email>1</email>
+    <degree>AdvancedBeginner</degree>
+    <cost_per_hour>1</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
-    <engineer_id>7</engineer_id>
-    <name>7</name>
-    <email>7</email>
-    <degree>AdvancedBeginner</degree>
-    <cost_per_hour>7</cost_per_hour>
+    <engineer_id>4</engineer_id>
+    <name>four</name>
+    <email>4</email>
+    <degree>Competent</degree>
+    <cost_per_hour>4</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
@@ -22,6 +22,14 @@
     <email>s@</email>
     <degree>Novice</degree>
     <cost_per_hour>2</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>7</engineer_id>
+    <name>7</name>
+    <email>7</email>
+    <degree>AdvancedBeginner</degree>
+    <cost_per_hour>7</cost_per_hour>
     <is_active>false</is_active>
   </Engineer>
 </ArrayOfEngineer>

@@ -19,6 +19,7 @@ internal class TaskImplementation : ITask
         StreamReader reader = new StreamReader(FILENAME);
         List<Task>? tasks = (List<Task>?)serializer.Deserialize(reader);
         reader.Close();
+        
         int new_id = Config.NextTaskId;
         Task new_item = item with { task_id = new_id };
         tasks?.Add(new_item);

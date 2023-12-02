@@ -113,10 +113,19 @@ static class XMLTools
 
     #endregion
 
-    public static T? ToEntity<T>(this XElement element) where T : class
+    //public static T? ToEntity<T>(this XElement element) where T : class
+    //{
+    //    if (element is null) return null;
+    //    var serializer = new XmlSerializer(typeof(T));
+    //    return (T)serializer.Deserialize(element.CreateReader())!;
+    //}
+    public static Dependence? ToDependence(this XElement? element)
     {
-        if (element is null) return null;
-        var serializer = new XmlSerializer(typeof(T));
-        return (T)serializer.Deserialize(element.CreateReader())!;
+        return element is null ? null : new Dependence()
+        {
+            id = (int)element?.Element("id"),
+            next_task = (int)element.Element("next_task")!,
+            prev_task = (int)element.Element("prev_task")!,
+        };
     }
 }
