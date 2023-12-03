@@ -20,6 +20,7 @@ public class DalAlreadyExistsException : Exception
 /// <summary>
 /// Exception for loading xml file
 /// </summary>
+/// 
 [Serializable]
 public class DalXMLFileLoadCreateException : Exception
 {
