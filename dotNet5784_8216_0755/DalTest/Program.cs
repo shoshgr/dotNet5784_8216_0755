@@ -7,6 +7,7 @@ namespace DalTest
 {
     internal class Program
     {
+      
         //private static readonly IDal s_dal = new DalList(); //stage 2
         private static readonly IDal s_dal = new DalXml();
         private static void main_menu(string choice)
@@ -33,7 +34,7 @@ namespace DalTest
                 Console.WriteLine(e);
             }
         }
-
+    
         /// <summary>
         /// The functions <entity>_menu represent the menu of the specific entity
         /// </summary>
@@ -181,7 +182,11 @@ namespace DalTest
                 int.TryParse(Console.ReadLine(), out id);
                 s_dal.task!.Delete(id);
             }
-            catch (Exception e)
+            catch ( DalDoesNotExistException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch(Exception e)
             {
                 Console.WriteLine(e);
             }
@@ -194,6 +199,10 @@ namespace DalTest
                 Console.WriteLine("enter dependence id");
                 int.TryParse(Console.ReadLine(), out id);
                 s_dal.dependence!.Delete(id);
+            }
+            catch (DalDoesNotExistException e)
+            {
+                Console.WriteLine(e);
             }
             catch (Exception e)
             {
@@ -209,12 +218,15 @@ namespace DalTest
                 int.TryParse(Console.ReadLine(), out id);
                 s_dal.engineer!.Delete(id);
             }
+            catch (DalDoesNotExistException e)
+            {
+                Console.WriteLine(e);
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
         }
-
         /// <summary>
         /// The functions get_<entity> gets the entity param from the user
         /// </summary>
@@ -304,20 +316,45 @@ namespace DalTest
         /// </summary>
         private static void create_engineer()
         {
-            DO.Engineer new_engineer = get_engineer();
-            s_dal.engineer!.Create(new_engineer);
+            try
+            {
+                DO.Engineer new_engineer = get_engineer();
+                s_dal.engineer!.Create(new_engineer);
+            }
+            catch (DalAlreadyExistsException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch(DalAlreadyExistsNotActiveException e)
+            {
+                Console.WriteLine(e);
+            }
+
         }
         private static void create_dependence()
         {
-            DO.Dependence new_dependence = get_dependence();
-            s_dal.dependence!.Create(new_dependence);
+            try
+            {
+                DO.Dependence new_dependence = get_dependence();
+                s_dal.dependence!.Create(new_dependence);
+            }
+            catch (DalAlreadyExistsException e)
+            {
+                Console.WriteLine(e);
+            }
         }
         private static void create_task()
         {
-            DO.Task new_task = get_task();
-            s_dal.task!.Create(new_task);
+            try
+            {
+                DO.Task new_task = get_task();
+                s_dal.task!.Create(new_task);
+            }
+            catch (DalAlreadyExistsException e)
+            {
+                Console.WriteLine(e);
+            }
         }
-
         /// <summary>
         /// The functions update_<entity>  updates an entity by id with  get functions that takes the param to change
         /// </summary>
@@ -345,10 +382,11 @@ namespace DalTest
                 DO.Engineer updated_engineer = new(_id, _name!, _email!, _degree, _cost_per_hour, _is_active);
                 s_dal.engineer!.Update(updated_engineer);
             }
-            catch (Exception e)
+            catch (DalDoesNotExistException e)
             {
                 Console.WriteLine(e);
             }
+           
         }
         private static void update_dependence()
         {
@@ -365,10 +403,11 @@ namespace DalTest
                 DO.Dependence updated_dependence = new(_id, _next_task, _prev_task);
                 s_dal.dependence!.Update(updated_dependence);
             }
-            catch (Exception e)
+            catch (DalDoesNotExistException e)
             {
                 Console.WriteLine(e);
             }
+          
         }
         private static void update_task()
         {
@@ -399,10 +438,11 @@ namespace DalTest
                 s_dal.task!.Update(updated_task);
 
             }
-            catch (Exception e)
+            catch (DalDoesNotExistException e)
             {
                 Console.WriteLine(e);
             }
+            
 
         }
         static void Main(string[] args)
@@ -420,6 +460,10 @@ namespace DalTest
                     choice = Console.ReadLine();
                 }
                 while (choice != "0");
+            }
+            catch(DalXMLFileLoadCreateException e)
+            {
+                Console.WriteLine(e);
             }
             catch (Exception e)
             {

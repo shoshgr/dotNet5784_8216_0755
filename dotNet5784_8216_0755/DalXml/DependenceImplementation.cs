@@ -28,7 +28,7 @@ internal class DependenceImplementation : IDependence
 
     public void Delete(int id)
     {
-        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Element("id") ==  id);
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Element("id")! ==  id);
         if (dependence == null)
         {
             throw new DalDoesNotExistException("A dependence with this ID number does not exist");
@@ -40,7 +40,7 @@ internal class DependenceImplementation : IDependence
 
     public Dependence? Read(int id)
     {
-        XElement? dependence = xml.Elements("Dependence").FirstOrDefault(d => (int)d?.Element("id") == id);
+        XElement? dependence = xml.Elements("Dependence").FirstOrDefault(d => (int)d.Element("id")! == id);
         if (dependence == null)
             return null;
 
@@ -49,7 +49,7 @@ internal class DependenceImplementation : IDependence
 
     public Dependence? Read(Func<Dependence, bool> filter)
     {
-        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(x => filter(x.ToDependence()));
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(x => filter(x!.ToDependence()!));
         if (dependence == null)
             return null;
         return dependence.ToDependence();
@@ -59,13 +59,13 @@ internal class DependenceImplementation : IDependence
     {
         if (filter is null)
             return xml.Descendants("Dependence").Select(el => el.ToDependence());
-        return xml.Descendants("Dependence").Where(el => filter(el.ToDependence())).Select(el => el.ToDependence());         
+        return xml.Descendants("Dependence").Where(el => filter(el!.ToDependence()!)).Select(el => el.ToDependence());         
     }
 
 
     public void Update(Dependence item)
     {
-        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Element("id") == item.id);
+        XElement? dependence = xml.Descendants("Dependence").FirstOrDefault(d => (int)d.Element("id")! == item.id);
         if (dependence == null)
             throw new DalDoesNotExistException("A dependence with this ID number does not exists");
         dependence.Remove();

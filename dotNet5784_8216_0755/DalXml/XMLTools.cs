@@ -123,7 +123,7 @@ static class XMLTools
     {
         return element is null ? null : new Dependence()
         {
-            id = (int)element?.Element("id"),
+            id = (int)element.Element("id")!,
             next_task = (int)element.Element("next_task")!,
             prev_task = (int)element.Element("prev_task")!,
         };
