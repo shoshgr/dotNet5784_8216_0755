@@ -16,7 +16,7 @@ static public class Initialization
         {
             DateTime date = DateTime.Now;
             DateTime _production_date = date.Add(TimeSpan.FromDays(-30));
-            _level = (Level)s_rand.Next(0, 6);
+            _level = (Level)s_rand.Next(0, 5);
             DateTime _estimated_end = date.Add(TimeSpan.FromDays(-5));
             Task new_task = new(0, _description, _level, _production_date, _estimated_end, false);
             s_dal!.task!.Create(new_task);
@@ -64,7 +64,7 @@ static public class Initialization
             while (s_dal!.engineer!.Read(_id) != null);
             _name = name;
             _mail = name + "@gmail.com";
-            _degree = (Level)s_rand.Next(0, 6);
+            _degree = (Level)s_rand.Next(0, 5);
             _cost = s_rand.Next(50, 200) * ((int)_degree) + s_rand.Next(50, 200);
             Engineer new_engineer = new(_id, _name, _mail, _degree, _cost, true);
             s_dal.engineer!.Create(new_engineer);

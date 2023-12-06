@@ -1,28 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDependence>
-  <Dependence>
-    <id>0</id>
-    <next_task>3</next_task>
-    <prev_task>2</prev_task>
-  </Dependence>
-  <Dependence>
-    <next_task>6</next_task>
-    <prev_task>5</prev_task>
-    <id>1</id>
-  </Dependence>
-  <Dependence>
-    <next_task>7</next_task>
-    <prev_task>6</prev_task>
-    <id>2</id>
-  </Dependence>
-  <Dependence>
-    <next_task>8</next_task>
-    <prev_task>7</prev_task>
-    <id>3</id>
-  </Dependence>
-  <Dependence>
-    <next_task>2</next_task>
-    <prev_task>1</prev_task>
-    <id>4</id>
-  </Dependence>
+  
 </ArrayOfDependence>
