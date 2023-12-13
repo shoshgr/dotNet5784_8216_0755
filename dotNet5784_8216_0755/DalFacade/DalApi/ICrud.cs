@@ -1,6 +1,8 @@
 ﻿using DO;
 namespace DalApi;
-
+/// <summary>
+/// GEneric interface to the data entitys
+/// </summary>
 public interface ICrud<T> where T : class
 {
     int Create(T item); //Creates new entity object in DAL

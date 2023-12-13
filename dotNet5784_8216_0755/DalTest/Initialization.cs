@@ -12,7 +12,7 @@ static public class Initialization
         string _description = "You haven't described the task yet";
         Level _level;
 
-        for (int i = 0; i < 100;)
+        for (int i = 0; i < 20;)
         {
             DateTime date = DateTime.Now;
             DateTime _production_date = date.Add(TimeSpan.FromDays(-30));
