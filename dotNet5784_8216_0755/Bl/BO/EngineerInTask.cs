@@ -1,7 +1,7 @@
 ﻿
 namespace BO;
 /// <summary>
-/// EngineerInTask Entity represents a task current engineer name and id
+/// EngineerInTask Entity represents a task's current engineer (name and id)
 /// </summary>
 /// <param name="id">the id of the engineer that working on this task </param>
 /// <param name="name">the name of the engineer that working on this task  </param>

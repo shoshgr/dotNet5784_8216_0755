@@ -1,20 +1,19 @@
 ﻿namespace BO;
 /// <summary>
-/// Milestone Entity represents an Milestone with all its props
+/// Milestone Entity represents a logical milestone with all its props
 /// </summary>
-/// <param name="id">unique id of the Milestone  </param>
-/// <param name="name">name of the Milestone</param>
-/// <param name="description"> the Milestone Description </param>
+/// <param name="id">unique id of the milestone</param>
+/// <param name="name">name of the milestone</param>
+/// <param name="description"> the milestone description </param>
 /// <param name="tasks_list"> tasks list that have dependence  </param>
-/// <param name="production_date">production date of the Milestone</param>
-/// <param name="start_date"> the date of starting the Milestone</param>
-/// <param name="final_date">the final date of ending the Milestone</param>
-/// <param name="estimated_end"> the estimated date of ending the Milestone</param>
-/// <param name="actual_end">the actual date of ending the Milestone</param>
-/// <param name="status">Milestone status </param>
-/// <param name="remarks">remarks on the Milestone</param>
-/// <param name="nickname">the nickname of the task that the engineer is working on </param>
-/// <param name="progress_percentage"> the progress percentage of work </param>
+/// <param name="production_date">production date of the milestone</param>
+/// <param name="start_date"> the date of starting the milestone</param>
+/// <param name="final_date">the final date of ending the milestone</param>
+/// <param name="estimated_end"> the estimated date of ending the milestone</param>
+/// <param name="actual_end">the actual date of ending the milestone</param>
+/// <param name="status">the milestone's status </param>
+/// <param name="remarks">remarks on the milestone</param>
+/// <param name="progress_percentage"> the progress percentage of work of the milestone </param>
 public class Milestone
 {
     public int id { get; init; }

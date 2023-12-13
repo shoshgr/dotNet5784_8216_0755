@@ -1,11 +1,9 @@
-﻿
-
-namespace BO;
+﻿namespace BO;
 /// <summary>
-/// TaskInList Entity represents an TaskInList with all its props
+/// TaskInList Entity represents a Task in list
 /// </summary>
-/// <param name="nickname">name of the task in list</param>
-/// <param name="description"> the Milestone Description </param>
+/// <param name="nickname">name of the task</param>
+/// <param name="description"> the task's description </param>
 /// <param name="id"> the task id </param>
 /// <param name="status" > the task status</param>
 public class TaskInList

@@ -1,8 +1,8 @@
 ﻿namespace BO;
 /// <summary>
-/// Task Entity represents a task with all its props
+/// Task Entity represents a logical task with all its props
 /// </summary>
-/// <param name="task_id">unique ID of task  </param>
+/// <param name="task_id">unique id of task</param>
 /// <param name="description">description of the task</param>
 /// <param name="nickname">Short name of the task</param>
 /// <param name="milestone">the task milestone</param>
@@ -16,7 +16,7 @@
 /// <param name="engineer">the id of the task's engineer</param>
 /// <param name="level">the task dificulty level </param>
 /// <param name="tasks_list">tasks list that have dependence</param>
-/// <param name="status">the task status  </param>
+/// <param name="status">the task status</param>
 public class Task {
     public int task_id { get;init;}
     public string? nickname { get;set;}
@@ -33,6 +33,4 @@ public class Task {
     public Status? status { get; set; }
     public EngineerInTask? engineer { get; set; }
     public MilestoneInTask ?milestone { get; set; }
-
-
 }

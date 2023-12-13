@@ -1,14 +1,12 @@
-﻿
-
-namespace BO;
+﻿namespace BO;
 /// <summary>
-/// MilestoneInList Entity represents an MilestoneInList with all its props
+/// MilestoneInList Entity represents a milestone in list
 /// </summary>
-/// <param name="name">name of the Milestone in list</param>
-/// <param name="description"> the Milestone Description </param>
-/// <param name="progress_percentage"> the progress percentage of milestone  </param>
-/// <param name="production_date">production date of the Milestone</param>
-/// <param name="status" > the Milestone status</param>
+/// <param name="name">name of the milestone</param>
+/// <param name="description">the milestone description </param>
+/// <param name="progress_percentage"> the progress percentage of the milestone  </param>
+/// <param name="production_date">production date of the milestone</param>
+/// <param name="status" > the milestone status</param>
 public class MilestoneInList
 {
     public string ?name { get; set; }
