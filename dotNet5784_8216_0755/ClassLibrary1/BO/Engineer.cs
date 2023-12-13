@@ -11,8 +11,8 @@
 public class Engineer
 {
     public int engineer_id { get; init;}
-    public string ?name { get; set;}
-    public string ?email { get; set;}
+    public required string name { get; set;}
+    public required string email { get; set;}
     public Level degree { get; set;}
     public int cost_per_hour { get; set; }
     TaskInEngineer? task{ get; set; }   
