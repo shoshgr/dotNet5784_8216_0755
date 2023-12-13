@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace BO;
 
-namespace BO
-{
-    internal class Enums
-    {
-    }
-}
+public enum Level { Novice, AdvancedBeginner, Competent, Proficient, Expert };
+public enum Status{ Unscheduled, Scheduled, OnTrack, InJeopard}

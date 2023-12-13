@@ -6,8 +6,8 @@
 /// <param name="engineer_id">unique id of the engineer  </param>
 /// <param name="name">name of the Engineer</param>
 /// <param name="email"> the engineer mail adress</param>
-/// <param name="Engineer_degree">the Engineer degree </param>
-/// <param name="task_name">the name of the current task</param>
+/// <param name="degree">the Engineer degree </param>
+/// <param name="is_active">check if the engnieer is active</param>
 /// <param name="cost_per_hour">  cost per hour </param>
 public record Engineer
 (
@@ -19,7 +19,7 @@ public record Engineer
     bool is_active = false
 )
 {
-    public Engineer() : this(0, "","", 0, 0) { }
+    public Engineer() : this(0,"","", 0, 0) { }
 }
 
 
