@@ -16,4 +16,8 @@ public interface IMilestone
     /// <param name="id">id of the milestone to update</param>
     /// <returns>updated logical milestone</returns>
     public BO.Milestone Update(int id);
+    /// <summary>
+    /// create a project schedule
+    /// </summary>
+    public void CreateProject();
 }

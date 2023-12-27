@@ -20,7 +20,7 @@ public interface IEngineer
     /// create a new engineer
     /// </summary>
     /// <param name="engineer">the new engineer</param>
-    public void Create(BO.Engineer engineer);
+    public int Create(BO.Engineer engineer);
     /// <summary>
     /// delete an engineer
     /// </summary>

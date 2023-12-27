@@ -21,7 +21,7 @@ public class Task {
     public int task_id { get;init;}
     public string? nickname { get;set;}
     public string? description { get;set;}
-    public Level level { get;set;}
+    public DO.Level level { get;set;}
     public string? product { get;set;}
     public string? remarks { get; set; }
     public DateTime production_date { get; set; }

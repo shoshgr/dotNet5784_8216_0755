@@ -7,13 +7,15 @@
 /// <param name="email"> the engineer mail adress</param>
 /// <param name="degree">the engineer degree </param>
 /// <param name="task">the engineer current task </param>
+/// /// <param name="is_active">check if the engnieer is active</param>
 /// <param name="cost_per_hour"> cost per hour of the engineer </param>
 public class Engineer
 {
     public int engineer_id { get; init;}
     public required string name { get; set;}
     public required string email { get; set;}
-    public Level degree { get; set;}
+    public DO.Level degree { get; set;}
     public int cost_per_hour { get; set; }
-    TaskInEngineer? task{ get; set; }   
+    public bool is_active  { get; set; }
+public TaskInEngineer? task{ get; set; }   
 }

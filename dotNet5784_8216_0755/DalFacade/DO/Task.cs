@@ -18,8 +18,6 @@
 /// <param name="engineer">the id of the task's engineer</param>
 /// <param name="level">the task dificulty level </param>
 /// 
-
-
 public record Task
 (
     int task_id,
