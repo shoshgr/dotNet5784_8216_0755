@@ -90,8 +90,8 @@ internal class EngineerImplementation : IEngineer
 
     public IEnumerable<BO.Engineer> ReadEngineers(Func<BO.Engineer, bool>? filter = null)
     {
-        IEnumerable<DO.Engineer> do_engineers = _dal.engineer.ReadAll()!;
-        IEnumerable<BO.Engineer> bo_engineers = from engineer in do_engineers
+       // IEnumerable<DO.Engineer> do_engineers = _dal.engineer.ReadAll()!;
+        IEnumerable<BO.Engineer> bo_engineers = from engineer in _dal.engineer.ReadAll()!
                                                 let task = _dal.task.Read(task => task.engineer == engineer.engineer_id)
                                       select new BO.Engineer()
                                       {
@@ -117,9 +117,10 @@ internal class EngineerImplementation : IEngineer
     {
         try
         {
-            validition(engineer);
           
-
+            DO.Engineer? is_exist = _dal.engineer.Read(engineer.engineer_id);
+            if (is_exist == null)
+                throw new NotImplementedException();
             _dal.engineer.Update(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, engineer.degree, engineer.cost_per_hour,engineer.is_active));
         }
         catch (Exception ex)

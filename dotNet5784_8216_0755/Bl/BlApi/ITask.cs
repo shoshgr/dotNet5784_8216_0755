@@ -20,7 +20,7 @@ public interface ITask
     /// create a new task
     /// </summary>
     /// <param name="engineer">the new task</param>
-    public void Create(BO.Task task);
+    public int Create(BO.Task task);
     /// <summary>
     /// delete a task
     /// </summary>

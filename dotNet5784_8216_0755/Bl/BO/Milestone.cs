@@ -17,11 +17,11 @@
 public class Milestone
 {
     public int id { get; init; }
-    public string? Name { get; set; }
+    public string? name { get; set; }
     public string? description { get; set; }
     public List<TaskInList> ?tasks_list { get; set; }
     public DateTime production_date { get; set; }
-    public DateTime estimated_end { get; set; }
+    public DateTime estimated_start { get; set; }
     public DateTime? start_date { get; set; }
     public DateTime? final_date { get; set;}
     public DateTime? actual_end { get; set;}

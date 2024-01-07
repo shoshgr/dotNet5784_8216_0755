@@ -25,8 +25,8 @@ public class Task {
     public string? product { get;set;}
     public string? remarks { get; set; }
     public DateTime production_date { get; set; }
-    public List<TaskInList>? tasks_list { get; set; }
-    public DateTime estimated_end { get; set; }
+    public required List<TaskInList> tasks_list  { get; set; }
+    public DateTime estimated_start { get; set; }
     public DateTime? start_date { get; set; }
     public DateTime? final_date { get; set; }
     public DateTime? actual_end { get; set; }
