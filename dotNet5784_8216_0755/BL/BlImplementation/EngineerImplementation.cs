@@ -1,11 +1,10 @@
 ﻿
 using BlApi;
 using BO;
-namespace BlImplementation;
-
-using DalApi;
 using DO;
 using System.Text.RegularExpressions;
+namespace BlImplementation;
+
 
 internal class EngineerImplementation : IEngineer
 {
