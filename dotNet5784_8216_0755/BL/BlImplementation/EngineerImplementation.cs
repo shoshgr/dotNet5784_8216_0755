@@ -1,7 +1,10 @@
-﻿namespace BlImplementation;
+﻿
 using BlApi;
 using BO;
+namespace BlImplementation;
 
+using DalApi;
+using DO;
 using System.Text.RegularExpressions;
 
 internal class EngineerImplementation : IEngineer
@@ -13,13 +16,13 @@ internal class EngineerImplementation : IEngineer
         string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])""|" + @"([-a-z0-9!#$%&'+/=?^_`{|}~]|(?<!\.)\.))(?<!\.)" + @"@[a-z0-9][\w\.-][a-z0-9]\.[a-z][a-z\.]*[a-z]$";
         var regex = new Regex(pattern, RegexOptions.IgnoreCase);
         if (!regex.IsMatch(engineer.email))
-            throw new NotImplementedException();// חריגה לעשות 
+            throw new BlInvalidValueException("invalid email");
         if (engineer.engineer_id < 0)
-            throw new NotImplementedException();// חריגה לעשות 
+            throw new BlInvalidValueException("engineer_id must be positive"); 
         if (engineer.name == "")
-            throw new NotImplementedException();// חריגה לעשות 
+            throw new BlInvalidValueException("name can not be null"); 
         if (engineer.cost_per_hour < 0)
-            throw new NotImplementedException();// חריגה לעשות 
+            throw new BlInvalidValueException("cost_per_hour must be positive"); 
     }
     public int Create(BO.Engineer engineer)
     {
@@ -27,12 +30,16 @@ internal class EngineerImplementation : IEngineer
         try
         {
             validition(engineer);
-            int id_engineer = _dal.engineer.Create(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, engineer.degree, engineer.cost_per_hour));
+            int id_engineer = _dal.engineer.Create(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, (DO.Level)engineer.degree, engineer.cost_per_hour));
             return id_engineer;
         }
-        catch (Exception e)
+        catch (DalAlreadyExistsNotActiveException e)
         {
-            throw new NotImplementedException();
+            throw new BlAlreadyExistsNotActiveException($"engineer with id: {engineer.engineer_id} is exist but not active",e);
+        }
+        catch (DalAlreadyExistsException e)
+        {
+            throw new BlAlreadyExistsException($"engineer with id: {engineer.engineer_id} is already exist ",e);
         }
     }
 
@@ -41,9 +48,7 @@ internal class EngineerImplementation : IEngineer
     {
         try
         {
-            var engineer = _dal.engineer?.Read(id);
-            if (engineer == null || engineer.is_active == false)
-                throw new NotImplementedException();
+           
             IEnumerable<DO.Task> tasks = _dal.task!.ReadAll()!;
             IEnumerable<int> taskId = from task in tasks
                                       where (task.engineer == id)
@@ -51,40 +56,37 @@ internal class EngineerImplementation : IEngineer
             if (taskId.Any())
                 throw new NotImplementedException();
             else
-                _dal.engineer!.Delete(engineer.engineer_id);
+                _dal.engineer!.Delete(id);
             ///לא לאפשר מחיקת מהנדס שסיים עכשיו משימה 
 
         }
-        catch (Exception e)
+        catch (DalDoesNotExistException e)
         {
-            throw new NotImplementedException();
+            throw new BlDoesNotExistException($"engineer with id: {id} does not exist ", e);
         }
-     
+        
+
     }
 
     public BO.Engineer Read(int id)
     {
-        try
-        {
+       
             DO.Engineer? do_engineer = _dal.engineer.Read(id);
             if(do_engineer==null)
-                throw new NotImplementedException();
+                throw new BlDoesNotExistException($"engineer with id: {id} does not exist ");
             DO.Task? task = _dal.task.Read(task => task.engineer == do_engineer.engineer_id);
             BO.Engineer bo_engineer = new BO.Engineer()
                                       {
                                           engineer_id = do_engineer.engineer_id,
                                           name = do_engineer.name,
                                           email = do_engineer.email,
-                                          degree = do_engineer.degree,
+                                          degree = (BO.Level)do_engineer.degree,
                                           cost_per_hour = do_engineer.cost_per_hour,
                                           is_active= do_engineer.is_active,
                                           task = (task != null) ? new TaskInEngineer() { task_id = task.task_id, nickname = task.nickname! } : null
                                       };
             return bo_engineer; 
-        }
-        catch(Exception e) {
-            throw new NotImplementedException();
-        }
+        
        
     }
 
@@ -98,7 +100,7 @@ internal class EngineerImplementation : IEngineer
                                           engineer_id = engineer.engineer_id,
                                           name = engineer.name,
                                           email = engineer.email,
-                                          degree = engineer.degree,
+                                          degree = (BO.Level)engineer.degree,
                                           cost_per_hour = engineer.cost_per_hour,
                                           is_active= engineer.is_active,
                                           task = (task != null) ? new TaskInEngineer() { task_id = task.task_id, nickname = task.nickname! } : null
@@ -118,15 +120,14 @@ internal class EngineerImplementation : IEngineer
         try
         {
           
-            DO.Engineer? is_exist = _dal.engineer.Read(engineer.engineer_id);
-            if (is_exist == null)
-                throw new NotImplementedException();
-            _dal.engineer.Update(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, engineer.degree, engineer.cost_per_hour,engineer.is_active));
+            //DO.Engineer? is_exist = _dal.engineer.Read(engineer.engineer_id);
+            //if (is_exist == null)
+            //    throw new NotImplementedException();
+            _dal.engineer.Update(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, (DO.Level)engineer.degree, engineer.cost_per_hour,engineer.is_active));
         }
-        catch (Exception ex)
+        catch (DalDoesNotExistException e)
         {
-
-            throw new NotImplementedException();
+            throw new BlDoesNotExistException($"engineer with id: {engineer.engineer_id} does not exist ", e);
         }
     }
 }

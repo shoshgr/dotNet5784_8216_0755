@@ -1,4 +1,5 @@
 ﻿namespace BO;
+
 /// <summary>
 /// TaskInList Entity represents a Task in list
 /// </summary>

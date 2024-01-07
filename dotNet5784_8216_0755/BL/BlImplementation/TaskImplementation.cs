@@ -1,8 +1,9 @@
 ﻿
-namespace BlImplementation;
+
 using BlApi;
 using BO;
-using DO;
+
+namespace BlImplementation;
 
 
 
@@ -44,7 +45,7 @@ internal class TaskImplementation : ITask
             product = do_task.product,
             remarks = do_task.remarks,
             engineer = new EngineerInTask { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
-            level = do_task.level,
+            level = (BO.Level)do_task.level,
             tasks_list = (List<TaskInList>)(from dep in _dal!.dependence!.ReadAll()
                                            where(dep.next_task == do_task.task_id)
                                            let task = _dal.task.Read(dep.prev_task)
@@ -54,18 +55,18 @@ internal class TaskImplementation : ITask
         };
     }
     private void validition(BO.Task task)
-    {// חריגה לעשות 
+    {
         if (task.task_id < 0)
-            throw new NotImplementedException();// חריגה לעשות 
+            throw new BlInvalidValueException("ID must be positive");
         if (task.nickname == "")
-            throw new NotImplementedException();// חריגה לעשות 
+            throw new BlInvalidValueException("nickname can not be null");
     }
     private void createTaskDependnce(List<TaskInList> tasks,int id) {
         if (tasks.Count == 0)
             return;
         IEnumerable<DO.Task> ?is_exist = _dal!.task!.ReadAll(task =>task.task_id == tasks.First().id)!;
         if (!is_exist.Any())
-            throw new NotImplementedException();
+            throw new BlDoesNotExistException($"the task with id : {tasks.First().id} does not exist");
        
         _dal.dependence.Create(new DO.Dependence(0, id, tasks.First()!.id));
         tasks.RemoveAt(0);
@@ -77,55 +78,51 @@ internal class TaskImplementation : ITask
         try
         {
             validition(task);
-            int id_task = _dal.task.Create(new DO.Task(task.task_id,task.description!, task.level, task.production_date,
+            int id_task = _dal.task.Create(new DO.Task(task.task_id,task.description!, (DO.Level)task.level, task.production_date,
                 task.estimated_start,false, task.start_date, task.final_date, task.actual_end,
                    task.nickname, task.product, task.remarks, task.engineer?.id));
             createTaskDependnce(task.tasks_list!, task.task_id);
             return id_task;
         }
-        catch (Exception e)
+        catch (BlDoesNotExistException e)
         {
-            throw new NotImplementedException();
+            throw e;
         }
+        catch(BlInvalidValueException e)
+        {
+            throw e;
+        }
+      
     }
     public void Delete(int id)
     {
         try
         {
             var task = _dal.task?.Read(id);
-            if (task == null )
-                throw new NotImplementedException();
-            IEnumerable<DO.Dependence> dependencies = _dal.dependence!.ReadAll()!;
-            IEnumerable<int> taskId = from dep in dependencies
-                                      where (dep.prev_task == id)
-                                      select task.task_id;
-            if (taskId.Any())
-                throw new NotImplementedException();
+            //if (task == null )
+            //    throw new BlDoesNotExistException($"the task with id : {id} does not exist");
+            IEnumerable<DO.Dependence> dependencies = _dal.dependence!.ReadAll(dep => dep.prev_task == id)!;
+        
+            if (dependencies.Any())
+                throw new BlCannotDeleteException($"task with id:{id} has dependency so it can not be deleted ");
             else
                 _dal.task!.Delete(id);
 
         }
-        catch (Exception e)
+        catch (DO.DalDoesNotExistException ex)
         {
-            throw new NotImplementedException();
+            throw new BlDoesNotExistException($"the task with id : {id} does not exist",ex);
         }
-
-        throw new NotImplementedException();
     }
     public BO.Task Read(int id)
     {
-        try
-        {
+       
             DO.Task? do_task = _dal.task.Read(id);
             if (do_task == null)
-                throw new NotImplementedException();
+                throw new BlDoesNotExistException($" task with id:{id} does not exist");
             BO.Task bo_task = convert_to_bo(do_task);
             return bo_task;
-        }
-        catch (Exception e)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 
     public IEnumerable<BO.Task> ReadTasks(Func<BO.Task, bool>? filter = null)
@@ -144,11 +141,15 @@ internal class TaskImplementation : ITask
 
     public void Update(BO.Task task)
     {
-        var is_exist = _dal.task?.Read(task.task_id);
-        if (is_exist == null)
-            throw new NotImplementedException();
-        _dal.task!.Update(new DO.Task(task.task_id, task.description!, task.level, task.production_date,
-                task.estimated_start, false, task.start_date, task.final_date, task.actual_end,
-                   task.nickname, task.product, task.remarks, task.engineer?.id));
+        try
+        {
+            _dal.task!.Update(new DO.Task(task.task_id, task.description!, (DO.Level)task.level, task.production_date,
+                    task.estimated_start, false, task.start_date, task.final_date, task.actual_end,
+                       task.nickname, task.product, task.remarks, task.engineer?.id));
+        }
+        catch (DO.DalDoesNotExistException ex)
+        {
+            throw new BlDoesNotExistException($"the task with id : {task.task_id} does not exist", ex);
+        }
     }
 }

@@ -14,7 +14,7 @@ public class Engineer
     public int engineer_id { get; init;}
     public required string name { get; set;}
     public required string email { get; set;}
-    public DO.Level degree { get; set;}
+    public BO.Level degree { get; set;}
     public int cost_per_hour { get; set; }
     public bool is_active  { get; set; }
 public TaskInEngineer? task{ get; set; }   

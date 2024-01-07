@@ -1,9 +1,10 @@
 ﻿
-namespace BlImplementation;
+
 using BlApi;
 using BO;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
+namespace BlImplementation;
 
 internal class MilestoneImplementation : IMilestone
 {
