@@ -24,7 +24,7 @@ public record Task
     string description,
     Level level,
     DateTime production_date,
-    DateTime estimated_start ,
+    DateTime estimated_end ,
     bool milestone = false,
     DateTime? start_date = null,
     DateTime? final_date = null,

@@ -8,8 +8,7 @@ using System.Runtime.Intrinsics.Arm;
 internal class MilestoneImplementation : IMilestone
 {
     private DalApi.IDal _dal = Factory.Get;
- 
- 
+
     private BO.Status calc_status(DO.Task task)
     {
         BO.Status status = (BO.Status)(task!.production_date == DateTime.MinValue ? 0
@@ -24,7 +23,7 @@ internal class MilestoneImplementation : IMilestone
         if (!prev_dependences.Any())
             return 100;
         int count_tasks = prev_dependences.Count();
-        int count_completed_tasks = prev_dependences.Aggregate(0, (count, next) => count += (_dal.task.Read((DO.Task task) => task.task_id == id)!).actual_end==DateTime.MinValue ? 1 : 0);
+        int count_completed_tasks = prev_dependences.Aggregate(0, (count, next) => count += (_dal.task.Read((DO.Task task) => task.task_id == id)!).actual_end == DateTime.MinValue ? 1 : 0);
         return (float)count_completed_tasks / count_tasks;
     }
     private Milestone convert_to_milestone(DO.Task milestone)
@@ -40,7 +39,7 @@ internal class MilestoneImplementation : IMilestone
             description = milestone.description,
             tasks_list = (List<TaskInList>)list,
             production_date = milestone.production_date,
-            estimated_start = milestone.estimated_start,
+            estimated_start = milestone.estimated_end,
             start_date = milestone.start_date,
             final_date = milestone.final_date,
             actual_end = milestone.actual_end,
@@ -56,10 +55,10 @@ internal class MilestoneImplementation : IMilestone
 
     public Milestone Read(int id)
     {
-        DO.Task ? milestone=_dal.task.Read(id);
-        if(milestone == null)
+        DO.Task? milestone = _dal.task.Read(id);
+        if (milestone == null)
             throw new NotImplementedException();
-        if(!milestone.milestone)
+        if (!milestone.milestone)
             throw new NotImplementedException();
         IEnumerable<TaskInList> list = from dep in _dal.dependence.ReadAll()!
                                        where (dep.next_task == id)

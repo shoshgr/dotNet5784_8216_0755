@@ -19,7 +19,7 @@ internal class TaskImplementation : ITask
     }
     private MilestoneInTask find_milestone(int id)
     {
-        DO.Dependence milstone_dep = _dal.dependence.ReadAll(dep => dep.next_task == id).First(dep => _dal.task.Read(task => task.task_id == dep.prev_task).milestone == true)!;
+        DO.Dependence milstone_dep = _dal.dependence.ReadAll(dep => dep.next_task == id).First(dep => _dal.task.Read(task => task.task_id == dep?.prev_task)!.milestone == true)!;
         DO.Task milestone = _dal.task.Read(task => task.task_id == milstone_dep.prev_task)!;
         return new MilestoneInTask
         {
@@ -39,17 +39,17 @@ internal class TaskImplementation : ITask
             production_date = do_task.production_date,
             start_date = do_task.start_date,
             final_date = do_task.final_date,
-            estimated_start = do_task.estimated_start,
+            estimated_start = do_task.estimated_end,
             actual_end = do_task.actual_end,
             product = do_task.product,
             remarks = do_task.remarks,
             engineer = new EngineerInTask { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
             level = do_task.level,
-            tasks_list = (List<TaskInList>)from dep in _dal!.dependence!.ReadAll()!
+            tasks_list = (List<TaskInList>)(from dep in _dal!.dependence!.ReadAll()
                                            where(dep.next_task == do_task.task_id)
                                            let task = _dal.task.Read(dep.prev_task)
                                            select new TaskInList { id = do_task.task_id, nickname = task.nickname
-                                           , description = task.description, status = calc_status(task) },
+                                           , description = task.description, status = calc_status(task) }),
             status = calc_status(do_task)
         };
     }
