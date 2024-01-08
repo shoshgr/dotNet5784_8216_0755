@@ -31,6 +31,6 @@ public class Task {
     public DateTime? final_date { get; set; }
     public DateTime? actual_end { get; set; }
     public Status? status { get; set; }
-    public EngineerInTask? engineer { get; set; }
+    public EngineerMainDetails? engineer { get; set; }
     public MilestoneInTask ?milestone { get; set; }
 }

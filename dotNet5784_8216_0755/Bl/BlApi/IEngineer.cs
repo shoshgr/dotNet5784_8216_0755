@@ -31,5 +31,10 @@ public interface IEngineer
     /// </summary>
     /// <param name="engineer">the updated engineer</param>
     public void Update(BO.Engineer engineer);
+    /// <summary>
+    /// read all the main details of the engineers
+    /// </summary>
+    /// <returns> colction type EngineerMainDetails</returns>
+    public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers();
 
 }

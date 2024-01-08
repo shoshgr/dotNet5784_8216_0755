@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerListWindow" Height="640" Width="800" >
+        Title="EngineerListWindow" Height="640" Width="800" 
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
+         
+>
     <!--Extrnal Grid-->
     <Grid>
         <Grid.RowDefinitions>
@@ -22,13 +25,14 @@
             <Label Grid.Column="0" Content="Label" HorizontalAlignment="Left" Margin="139,10,0,0" VerticalAlignment="Top"/>
             <ComboBox Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" />
         </Grid>
-        <ListView Grid.Row="1">
+        <ListView Grid.Row="1" Margin="5" ItemsSource = "{Binding  EngineerList }">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn/>
+                    <GridViewColumn  Header="id" DisplayMemberBinding ="{Binding id}"/>
+                    <GridViewColumn  Header="name" DisplayMemberBinding ="{Binding name}"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100"/>
+        <Button Content="Add" Grid.Row="2" HorizontalAlignment="Center" Height="50" Width="100" />
     </Grid>
 </Window>

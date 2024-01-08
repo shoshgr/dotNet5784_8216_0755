@@ -5,13 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="276" Width="545">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="400*"/>
+            <ColumnDefinition Width="383*"/>
+            <ColumnDefinition Width="17*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="0" Content="show list" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnEngineers_Click"/>
-        <Button Grid.Column="1" Content="initialize data" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnInitialization_Click"/>
+        <Button Grid.Column="1" Content="show list" Width="100" Height="100" HorizontalAlignment="Center" VerticalAlignment="Center" Click="BtnEngineers_Click"/>
+        <Button Grid.Column="2" Content="initialize data" Width="100" Height="100" HorizontalAlignment="Left" VerticalAlignment="Center" Click="BtnInitialization_Click" Margin="150,0,0,0"/>
     </Grid>
 </Window>

@@ -44,7 +44,7 @@ internal class TaskImplementation : ITask
             actual_end = do_task.actual_end,
             product = do_task.product,
             remarks = do_task.remarks,
-            engineer = new EngineerInTask { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
+            engineer = new EngineerMainDetails { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
             level = (BO.Level)do_task.level,
             tasks_list = (List<TaskInList>)(from dep in _dal!.dependence!.ReadAll()
                                            where(dep.next_task == do_task.task_id)

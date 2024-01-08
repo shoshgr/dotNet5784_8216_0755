@@ -113,6 +113,22 @@ internal class EngineerImplementation : IEngineer
         return bo_engineers;
 
     }
+    public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers()
+    {
+        // IEnumerable<DO.Engineer> do_engineers = _dal.engineer.ReadAll()!;
+        IEnumerable<BO.EngineerMainDetails> bo_engineers = from engineer in _dal.engineer.ReadAll()!
+                                                let task = _dal.task.Read(task => task.engineer == engineer.engineer_id)
+                                                select new BO.EngineerMainDetails()
+                                                {
+                                                    
+                                                    name = engineer.name,
+                                                    id = engineer.engineer_id
+
+                                                };
+       
+        return bo_engineers;
+
+    }
 
     public void Update(BO.Engineer engineer)
     {

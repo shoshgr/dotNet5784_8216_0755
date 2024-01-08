@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using PL.Engineer;
 namespace PL
 {
     /// <summary>
@@ -27,7 +27,7 @@ namespace PL
 
         private void BtnEngineers_Click(object sender, RoutedEventArgs e)
         {
-            new Engineer.EngineerListWindow().Show();
+            new EngineerListWindow().Show();
         }
 
         private void BtnInitialization_Click(object sender, RoutedEventArgs e)
