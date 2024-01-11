@@ -5,8 +5,83 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
-        Title="EngineerWindow" Height="450" Width="800">
+        Title="EngineerWindow" Height="450" Width="800"
+        DataContext="{Binding curEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Window.Resources>
+        <!--button style definition-->
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Height" Value="44"/>
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="Background"  Value="#FFAEF9DE"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="500" />
+            <Setter Property="FontStyle" Value="Italic"/>
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+
+    </Window.Resources>
+
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#FFD1D1D1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="237*"/>
+                <ColumnDefinition Width="563*"/>
+            </Grid.ColumnDefinitions>
+            <!--<Label Grid.Column="0" Grid.Row="6"  Content="task" FontSize="25" VerticalAlignment="Center" Height="44"/>
+            <DataGrid Grid.Column="1" Grid.Row="6" ItemsSource="{Binding task}"  IsEnabled="{Binding engineer_id, Mode=OneTime, Converter={StaticResource convertIdToBool}}" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="id" Binding="{Binding task_id }"/>
+                    <DataGridTextColumn Header="name" Binding="{Binding nickname}"/>
+                </DataGrid.Columns>
+            </DataGrid>-->
+            <Label Grid.Column="0" Grid.Row="5"  Content="is active" Style="{StaticResource LabelStyle}" />
+            <CheckBox Background="#FFAEF9DE" Grid.Column="1"  HorizontalAlignment="Left" IsChecked="{Binding is_active}" Margin="180,10,0,0" Grid.Row="5" VerticalAlignment="Center" Height="20" Width="30"/>
+            <Label Grid.Column="0" Grid.Row="4"  Content="cost per hour" Style="{StaticResource LabelStyle}"/>
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="4"  Text="{Binding cost_per_hour, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="3"  Content="degree" Style="{StaticResource LabelStyle}"/>
+
+            <ComboBox Grid.Column="1" HorizontalAlignment="Left" Background="#FFAEF9DE"  Grid.Row="3" VerticalAlignment="Center" Width="250" Height="30" 
+                      ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectedValue="{Binding degree, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"  Margin="146,0,0,0"/>
+            <Label Grid.Column="0" Grid.Row="2"  Content="email" Style="{StaticResource LabelStyle}"/>
+
+            <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="2"  Text="{Binding email, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"/>
+            <Label Grid.Column="0" Grid.Row="1"  Content="name" Style="{StaticResource LabelStyle}"/>
+
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="1"  Grid.Column="1" Text="{Binding name, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"  />
+            <Label Grid.Column="0" Grid.Row="0"  Content="id" Style="{StaticResource LabelStyle}"/>
+
+            <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}" Text="{Binding engineer_id, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+
+        </Grid>
+        <Button Background="#FFAEF9DE" FontSize="15" FontStyle="Italic" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" Click="add_update_button_click" Content="{Binding engineer_id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"/>
     </Grid>
 </Window>

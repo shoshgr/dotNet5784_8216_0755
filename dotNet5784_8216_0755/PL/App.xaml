@@ -5,5 +5,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <local:LevelCollection x:Key="LevelCollection" />
+        <local:ConvertIdToContent x:Key="ConverIdToContentKey"/>
+        <local:convertIdToBool x:Key="convertIdToBool"/>
+        
     </Application.Resources>
 </Application>

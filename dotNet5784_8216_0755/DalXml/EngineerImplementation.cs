@@ -63,12 +63,11 @@ internal class EngineerImplementation : IEngineer
         if (filter != null)
         {
             return from engineer in engineers
-                   where filter(engineer) && (engineer.is_active)
+                   where filter(engineer) 
                    select engineer;
         }
-        return from engineer in engineers
-               where engineer.is_active
-               select engineer;
+        return engineers!;
+              
     }
 
     public void Update(Engineer item)

@@ -35,6 +35,6 @@ public interface IEngineer
     /// read all the main details of the engineers
     /// </summary>
     /// <returns> colction type EngineerMainDetails</returns>
-    public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers();
+    public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers(Func<DO.Engineer, bool>? filter = null);
 
 }

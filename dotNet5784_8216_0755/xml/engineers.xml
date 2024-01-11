@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfEngineer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Engineer>
-    <engineer_id>1</engineer_id>
-    <name>1</name>
-    <email>1</email>
-    <degree>AdvancedBeginner</degree>
-    <cost_per_hour>1</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
     <engineer_id>4</engineer_id>
     <name>four</name>
     <email>4</email>
@@ -81,14 +73,6 @@
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
-    <engineer_id>5538</engineer_id>
-    <name>Shoshana Grilak</name>
-    <email>Shoshana Grilak@gmail.com</email>
-    <degree>Novice</degree>
-    <cost_per_hour>197</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
     <engineer_id>7020</engineer_id>
     <name>Bil Gates</name>
     <email>Bil Gates@gmail.com</email>
@@ -102,14 +86,6 @@
     <email>Orna Levi@gmail.com</email>
     <degree>Proficient</degree>
     <cost_per_hour>544</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
-    <engineer_id>8632</engineer_id>
-    <name>ayala man</name>
-    <email>ayala man@gmail.com</email>
-    <degree>Competent</degree>
-    <cost_per_hour>257</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
@@ -526,7 +502,7 @@
     <email> Shira Israelof@gmail.com</email>
     <degree>AdvancedBeginner</degree>
     <cost_per_hour>231</cost_per_hour>
-    <is_active>true</is_active>
+    <is_active>false</is_active>
   </Engineer>
   <Engineer>
     <engineer_id>9106</engineer_id>
@@ -534,14 +510,6 @@
     <email>Sari Chefetz@gmail.com</email>
     <degree>Novice</degree>
     <cost_per_hour>166</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
-    <engineer_id>8994</engineer_id>
-    <name>Shoshana Grilak</name>
-    <email>Shoshana Grilak@gmail.com</email>
-    <degree>Competent</degree>
-    <cost_per_hour>413</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
@@ -1398,6 +1366,62 @@
     <email>William@gmail.com</email>
     <degree>AdvancedBeginner</degree>
     <cost_per_hour>159</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>33333</engineer_id>
+    <name>shosh</name>
+    <email>shosh@gmail.com</email>
+    <degree>AdvancedBeginner</degree>
+    <cost_per_hour>22</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>1</engineer_id>
+    <name>1</name>
+    <email>1</email>
+    <degree>Novice</degree>
+    <cost_per_hour>1</cost_per_hour>
+    <is_active>false</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>5538</engineer_id>
+    <name>Shoshana Grilak</name>
+    <email>ShosGrilak@gmail.com</email>
+    <degree>Novice</degree>
+    <cost_per_hour>197</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>8994</engineer_id>
+    <name>Shoshana Grilak</name>
+    <email>Shoshana kkkGrilak@gmail.com</email>
+    <degree>Competent</degree>
+    <cost_per_hour>413</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>8632</engineer_id>
+    <name>man</name>
+    <email>ayala man@gmail.com</email>
+    <degree>Competent</degree>
+    <cost_per_hour>257</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>555</engineer_id>
+    <name>65</name>
+    <email>ew</email>
+    <degree>AdvancedBeginner</degree>
+    <cost_per_hour>5</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>222</engineer_id>
+    <name>ijij</name>
+    <email>shosh@gmail.com</email>
+    <degree>AdvancedBeginner</degree>
+    <cost_per_hour>55</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
 </ArrayOfEngineer>

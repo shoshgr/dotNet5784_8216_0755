@@ -10,25 +10,13 @@ internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = Factory.Get;
    
-    private void validition(BO.Engineer engineer)
-    {
-        string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])""|" + @"([-a-z0-9!#$%&'+/=?^_`{|}~]|(?<!\.)\.))(?<!\.)" + @"@[a-z0-9][\w\.-][a-z0-9]\.[a-z][a-z\.]*[a-z]$";
-        var regex = new Regex(pattern, RegexOptions.IgnoreCase);
-        if (!regex.IsMatch(engineer.email))
-            throw new BlInvalidValueException("invalid email");
-        if (engineer.engineer_id < 0)
-            throw new BlInvalidValueException("engineer_id must be positive"); 
-        if (engineer.name == "")
-            throw new BlInvalidValueException("name can not be null"); 
-        if (engineer.cost_per_hour < 0)
-            throw new BlInvalidValueException("cost_per_hour must be positive"); 
-    }
+   
     public int Create(BO.Engineer engineer)
     {
         
         try
         {
-            validition(engineer);
+            Tools.engineer_validition(engineer);
             int id_engineer = _dal.engineer.Create(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, (DO.Level)engineer.degree, engineer.cost_per_hour));
             return id_engineer;
         }
@@ -39,6 +27,10 @@ internal class EngineerImplementation : IEngineer
         catch (DalAlreadyExistsException e)
         {
             throw new BlAlreadyExistsException($"engineer with id: {engineer.engineer_id} is already exist ",e);
+        }
+        catch(BlInvalidValueException e)
+        {
+            throw e;
         }
     }
 
@@ -53,7 +45,7 @@ internal class EngineerImplementation : IEngineer
                                       where (task.engineer == id)
                                       select task.task_id;
             if (taskId.Any())
-                throw new NotImplementedException();
+                throw new BlCannotDeleteException("can not delete engineer that has task ");
             else
                 _dal.engineer!.Delete(id);
             ///לא לאפשר מחיקת מהנדס שסיים עכשיו משימה 
@@ -107,26 +99,40 @@ internal class EngineerImplementation : IEngineer
         if (filter != null)
         {
             return from engineer in bo_engineers
-                   where filter(engineer)&&(engineer.is_active)
+                   where filter(engineer)
                    select engineer;
         }
         return bo_engineers;
 
     }
-    public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers()
+    public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers(Func<DO.Engineer, bool>? filter = null)
     {
-        // IEnumerable<DO.Engineer> do_engineers = _dal.engineer.ReadAll()!;
-        IEnumerable<BO.EngineerMainDetails> bo_engineers = from engineer in _dal.engineer.ReadAll()!
-                                                let task = _dal.task.Read(task => task.engineer == engineer.engineer_id)
-                                                select new BO.EngineerMainDetails()
-                                                {
-                                                    
-                                                    name = engineer.name,
-                                                    id = engineer.engineer_id
-
-                                                };
        
-        return bo_engineers;
+        if (filter != null)
+        {
+            return from engineer in _dal.engineer.ReadAll()!
+                   where filter(engineer)
+                   let task = _dal.task.Read(task => task.engineer == engineer.engineer_id)
+                   select new BO.EngineerMainDetails()
+                   {
+
+                       name = engineer.name,
+                       id = engineer.engineer_id
+
+                   };
+        }
+
+        return from engineer in _dal.engineer.ReadAll()!
+               let task = _dal.task.Read(task => task.engineer == engineer.engineer_id)
+               select new BO.EngineerMainDetails()
+               {
+
+                   name = engineer.name,
+                   id = engineer.engineer_id
+
+               };
+
+        
 
     }
 
