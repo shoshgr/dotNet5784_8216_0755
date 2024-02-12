@@ -25,22 +25,6 @@
     <is_active>false</is_active>
   </Engineer>
   <Engineer>
-    <engineer_id>2248</engineer_id>
-    <name> Eli Amar</name>
-    <email> Eli Amar@gmail.com</email>
-    <degree>Novice</degree>
-    <cost_per_hour>88</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
-    <engineer_id>1826</engineer_id>
-    <name> Yair Cohen</name>
-    <email> Yair Cohen@gmail.com</email>
-    <degree>Proficient</degree>
-    <cost_per_hour>679</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
     <engineer_id>9320</engineer_id>
     <name> Ariela Levin</name>
     <email> Ariela Levin@gmail.com</email>
@@ -57,27 +41,11 @@
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
-    <engineer_id>3418</engineer_id>
-    <name> Shira Israelof</name>
-    <email> Shira Israelof@gmail.com</email>
-    <degree>Novice</degree>
-    <cost_per_hour>51</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
     <engineer_id>2500</engineer_id>
     <name>Sari Chefetz</name>
     <email>Sari Chefetz@gmail.com</email>
     <degree>Novice</degree>
     <cost_per_hour>109</cost_per_hour>
-    <is_active>true</is_active>
-  </Engineer>
-  <Engineer>
-    <engineer_id>7020</engineer_id>
-    <name>Bil Gates</name>
-    <email>Bil Gates@gmail.com</email>
-    <degree>Proficient</degree>
-    <cost_per_hour>544</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
   <Engineer>
@@ -1422,6 +1390,46 @@
     <email>shosh@gmail.com</email>
     <degree>AdvancedBeginner</degree>
     <cost_per_hour>55</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>2</engineer_id>
+    <name>ugujb</name>
+    <email>shoshgrilak@gmail.com</email>
+    <degree>Competent</degree>
+    <cost_per_hour>2</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>2248</engineer_id>
+    <name> Eli Amarי</name>
+    <email> Eli Amar@gmail.com</email>
+    <degree>Novice</degree>
+    <cost_per_hour>88</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>7020</engineer_id>
+    <name>Bil Gates</name>
+    <email>Bil Gates@gmail.com</email>
+    <degree>Expert</degree>
+    <cost_per_hour>544</cost_per_hour>
+    <is_active>true</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>3418</engineer_id>
+    <name> Shira Israelofm  </name>
+    <email> Shira Israelof@gmail.com</email>
+    <degree>Novice</degree>
+    <cost_per_hour>51</cost_per_hour>
+    <is_active>false</is_active>
+  </Engineer>
+  <Engineer>
+    <engineer_id>1826</engineer_id>
+    <name> Yair Cohen</name>
+    <email> Yair Cohen@gmail.com</email>
+    <degree>Proficient</degree>
+    <cost_per_hour>679</cost_per_hour>
     <is_active>true</is_active>
   </Engineer>
 </ArrayOfEngineer>

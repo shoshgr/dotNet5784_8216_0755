@@ -47,8 +47,7 @@ namespace PL.Engineer
 
         private void add_engineer_btn_click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            button.Background = Brushes.LightPink;
+           
             new EngineerWindow(0).ShowDialog();
             
         }
