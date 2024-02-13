@@ -1,0 +1,124 @@
+﻿<Window x:Class="PL.Task.TaskWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL.Task"
+        mc:Ignorable="d"
+        Title="TaskWindow" Height="450" Width="800"
+    DataContext="{Binding curTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    <Window.Resources>
+        <!--button style definition-->
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+        <Style x:Key="textBoxStyle" TargetType="TextBox">
+            <Setter Property="Background"  Value="#FFAEF9DE"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="500" />
+            <Setter Property="FontStyle" Value="Italic"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid  Background="#FFD1D1D1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="237*"/>
+                <ColumnDefinition Width="563*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="14"  Content="status" Style="{StaticResource LabelStyle}" />
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="14"  Grid.Column="1" Text="{Binding satus, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"  />
+
+            <Label Grid.Column="0" Grid.Row="13"  Content="tasks list" Style="{StaticResource LabelStyle}"/>
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="13"  Text="{Binding tasks_list, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="12"  Content="level" Style="{StaticResource LabelStyle}"/>
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="12"  Text="{Binding level, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="11"  Content="engineer" Style="{StaticResource LabelStyle}"/>
+            <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="11"  Text="{Binding engineer, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"/>
+
+            <Label Grid.Column="0" Grid.Row="10"  Content="remarks" Style="{StaticResource LabelStyle}"/>
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="10"  Grid.Column="1" Text="{Binding remarks, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"  />
+
+            <Label Grid.Column="0" Grid.Row="9"  Content="product" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="9" Style="{StaticResource textBoxStyle}" Text="{Binding product, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="8"  Content="actual end" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="8" Style="{StaticResource textBoxStyle}" Text="{Binding actual_end, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="7"  Content="estimated end" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="7" Style="{StaticResource textBoxStyle}" Text="{Binding estimated_end, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="6"  Content="final date" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource textBoxStyle}" Text="{Binding final_date, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="5"  Content="start date" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource textBoxStyle}" Text="{Binding start_date, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="4"  Content="production date" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource textBoxStyle}" Text="{Binding production_date, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="3"  Content="milestone" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource textBoxStyle}" Text="{Binding milestone, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="2"  Content="nickname" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Style="{StaticResource textBoxStyle}" Text="{Binding nickname, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0"  Grid.Row="1" Content="description" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top"/>
+            <TextBox Grid.Column="1" Grid.Row="1" Style="{StaticResource textBoxStyle}" Text="{Binding description, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+            <Label Grid.Column="0" Grid.Row="0"  Content="task id" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top" />
+            <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}" Text="{Binding task_id, 
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+
+
+        </Grid>
+        <Button Background="#FFAEF9DE" FontSize="15" FontStyle="Italic" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" Click="add_update_button_click" Content="{Binding task_id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"/>
+    </Grid>
+</Window>

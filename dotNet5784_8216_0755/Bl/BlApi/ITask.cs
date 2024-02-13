@@ -31,4 +31,9 @@ public interface ITask
     /// </summary>
     /// <param name="engineer">the updated task</param>
     public void Update(BO.Task task);
+    /// <summary>
+    /// read all the main details of the tasks
+    /// </summary>
+    /// <returns> colection type TaskInList</returns>
+    public IEnumerable<BO.TaskInList> ReadMainDetailsTasks(Func<DO.Task, bool>? filter = null);
 }

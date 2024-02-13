@@ -1,6 +1,4 @@
-﻿
-
-using System.Windows;
+﻿using System.Windows;
 using System.Collections.ObjectModel;
 using System.Windows.Controls;
 using System;
@@ -34,40 +32,29 @@ namespace PL.Engineer
         DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerMainDetails>),
         typeof(EngineerListWindow), new PropertyMetadata(null));
 
-        
-            private void Level_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-            {
-            
+
+        private void Level_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
             var temp = levels == BO.Level.None ?
             s_bl?.Engineer.ReadMainDetailsEngineers() :
             s_bl?.Engineer.ReadMainDetailsEngineers(item => (BO.Level)item.degree == levels);
             EngineerList = temp == null ? new() : new(temp);
-
-            }
+        }
 
         private void add_engineer_btn_click(object sender, RoutedEventArgs e)
         {
-           
+            Button button = (Button)sender;
+            button.Background = Brushes.LightPink;
             new EngineerWindow(0).ShowDialog();
-            
-        }
-        private void update_engineer(object sender, RoutedEventArgs e)
-        {
-         
-            BO.EngineerMainDetails? Engineer = (sender as ListView)?.SelectedItem as BO.EngineerMainDetails;
-            var dialog = new EngineerWindow(Engineer!.id);  
-            dialog.Closed += Dialog_Closed!; 
-            dialog.ShowDialog();
-        }
-        
-
-// פעולה שתתבצע לאחר סגירת הדיאלוג
-private void Dialog_Closed(object sender, EventArgs e)
-        {
             var temp = s_bl?.Engineer.ReadMainDetailsEngineers();
             EngineerList = temp == null ? new() : new(temp);
         }
-
-        
+        private void update_engineer(object sender, RoutedEventArgs e)
+        {
+            BO.EngineerMainDetails? Engineer = (sender as ListView)?.SelectedItem as BO.EngineerMainDetails;
+            new EngineerWindow(Engineer!.id).ShowDialog();
+            var temp = s_bl?.Engineer.ReadMainDetailsEngineers();
+            EngineerList = temp == null ? new() : new(temp);
+        }
     }
 }

@@ -9,12 +9,11 @@
     <Window.Resources>
         <!--button style definition-->
         <Style x:Key="ButtonStyle" TargetType="Button">
-
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="Background" Value="#FFAEF9DE"/>
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="Width" Value="200"/>
-            <Setter Property="Height" Value="200"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Width" Value="80"/>
+            <Setter Property="Height" Value="80"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="Template">
@@ -22,7 +21,7 @@
                     <ControlTemplate TargetType="Button">
                         <Grid>
                             <Ellipse Fill="{TemplateBinding Background}"  Stroke="Black" StrokeThickness="1" 
-                             Width="200" Height="120"
+                             Width="80" Height="60"
                              HorizontalAlignment="Center" VerticalAlignment="Center" />
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
@@ -30,22 +29,26 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                
+
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="LightPink"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
-
     </Window.Resources>
+
     <Grid  Background="#FFD1D1D1">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="400*"/>
-            <ColumnDefinition Width="383*"/>
-            <ColumnDefinition Width="17*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Column="1" Style="{StaticResource ButtonStyle}"   Content="show list"    Click="BtnEngineers_Click" RenderTransformOrigin="0.903,1.12">
+        <Button Grid.Column="0" Style="{StaticResource ButtonStyle}"   Content="show tasks"    Click="BtnTasks_Click" RenderTransformOrigin="0.903,1.12">
+            <Button.BorderBrush>
+                <ImageBrush/>
+            </Button.BorderBrush>
+        </Button>
+        <Button Grid.Column="1" Style="{StaticResource ButtonStyle}"   Content="show engineers"    Click="BtnEngineers_Click" RenderTransformOrigin="0.903,1.12">
             <Button.BorderBrush>
                 <ImageBrush/>
             </Button.BorderBrush>

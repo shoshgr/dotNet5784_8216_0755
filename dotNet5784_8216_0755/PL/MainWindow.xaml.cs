@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using PL.Engineer;
+using PL.Task;
+
 namespace PL
 {
     /// <summary>
@@ -27,7 +29,7 @@ namespace PL
 
         private void BtnEngineers_Click(object sender, RoutedEventArgs e)
         {
-          
+
             new EngineerListWindow().Show();
         }
 
@@ -40,6 +42,12 @@ namespace PL
             {
                 DalTest.Initialization.Do(Factory.Get);
             }
+        }
+
+        private void BtnTasks_Click(object sender, RoutedEventArgs e)
+        {
+            new TaskListWindow().Show();
+
         }
     }
 }
