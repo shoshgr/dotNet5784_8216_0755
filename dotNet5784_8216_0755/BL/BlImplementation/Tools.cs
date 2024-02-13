@@ -56,7 +56,7 @@ static class Tools
             actual_end = do_task.actual_end,
             product = do_task.product,
             remarks = do_task.remarks,
-            engineer = new EngineerMainDetails { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
+            engineer = do_task.engineer==null?null: new EngineerMainDetails { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
             level = (BO.Level)do_task.level,
             tasks_list = (List<TaskInList>)(from dep in _dal!.dependence!.ReadAll()
                                             where (dep.next_task == do_task.task_id)
@@ -64,14 +64,14 @@ static class Tools
                                             select new TaskInList
                                             {
                                                 id = do_task.task_id,
-                                                nickname = task.nickname
-                                            ,
+                                                nickname = task.nickname,
                                                 description = task.description,
                                                 status = calc_status(task)
-                                            }),
+                                            }).ToList(),
             status = calc_status(do_task)
         };
     }
+
     public static void engineer_validition(BO.Engineer engineer)
     {
         string pattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
@@ -84,13 +84,11 @@ static class Tools
     }
     public static MilestoneInTask find_milestone(int id)
     {
-        DO.Dependence milstone_dep = _dal.dependence.ReadAll(dep => dep.next_task == id).First(dep => _dal.task.Read(task => task.task_id == dep?.prev_task)!.milestone == true)!;
-        DO.Task milestone = _dal.task.Read(task => task.task_id == milstone_dep.prev_task)!;
-        return new MilestoneInTask
-        {
-            id = milestone.task_id,
-            name = milestone.nickname!
-        };
+        MilestoneInTask milestoneInTask = (from d in _dal.dependence.ReadAll()
+                                           let next_task = d.next_task
+                                           where next_task == id && (_dal.task.Read(d.prev_task)!.milestone == true)
+                                           select new MilestoneInTask { id = d.prev_task, name = _dal.task.Read(d.prev_task)!.nickname! }).FirstOrDefault()!;
+        return milestoneInTask;
     }
     public static float calc_ProgressRate(int id)
     {

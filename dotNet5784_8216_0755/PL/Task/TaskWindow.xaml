@@ -49,60 +49,51 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="237*"/>
                 <ColumnDefinition Width="563*"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="14"  Content="status" Style="{StaticResource LabelStyle}" />
-            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="14"  Grid.Column="1" Text="{Binding satus, 
+            <Label Grid.Column="0" Grid.Row="12"  Content="status" Style="{StaticResource LabelStyle}" />
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="12"  Grid.Column="1" Text="{Binding satus, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"  />
 
-            <Label Grid.Column="0" Grid.Row="13"  Content="tasks list" Style="{StaticResource LabelStyle}"/>
-            <TextBox Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="13"  Text="{Binding tasks_list, 
-                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+            <Label Grid.Column="0" Grid.Row="11"  Content="level" Style="{StaticResource LabelStyle}"/>
+            <ComboBox Grid.Column="1" HorizontalAlignment="Left" Background="#FFAEF9DE"  Grid.Row="11" VerticalAlignment="Center" Width="250" Height="30" 
+                      ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectedValue="{Binding level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"  Margin="146,0,0,0"/>
 
-            <Label Grid.Column="0" Grid.Row="12"  Content="level" Style="{StaticResource LabelStyle}"/>
-            <TextBox Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="12"  Text="{Binding level, 
-                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
-            <Label Grid.Column="0" Grid.Row="11"  Content="engineer" Style="{StaticResource LabelStyle}"/>
-            <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="11"  Text="{Binding engineer, 
+            <Label Grid.Column="0" Grid.Row="10"  Content="engineer" Style="{StaticResource LabelStyle}"/>
+            <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="10"  Text="{Binding engineer, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"/>
 
-            <Label Grid.Column="0" Grid.Row="10"  Content="remarks" Style="{StaticResource LabelStyle}"/>
-            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="10"  Grid.Column="1" Text="{Binding remarks, 
+            <Label Grid.Column="0" Grid.Row="9"  Content="remarks" Style="{StaticResource LabelStyle}"/>
+            <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="9"  Grid.Column="1" Text="{Binding remarks, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"  />
 
-            <Label Grid.Column="0" Grid.Row="9"  Content="product" Style="{StaticResource LabelStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="9" Style="{StaticResource textBoxStyle}" Text="{Binding product, 
+            <Label Grid.Column="0" Grid.Row="8"  Content="product" Style="{StaticResource LabelStyle}"/>
+            <TextBox Grid.Column="1" Grid.Row="8" Style="{StaticResource textBoxStyle}" Text="{Binding product, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
-            <Label Grid.Column="0" Grid.Row="8"  Content="actual end" Style="{StaticResource LabelStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="8" Style="{StaticResource textBoxStyle}" Text="{Binding actual_end, 
+            <Label Grid.Column="0" Grid.Row="7"  Content="actual end" Style="{StaticResource LabelStyle}"/>
+            <DatePicker Grid.Column="1" Grid.Row="7" Text="{Binding actual_end, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
-            <Label Grid.Column="0" Grid.Row="7"  Content="estimated end" Style="{StaticResource LabelStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="7" Style="{StaticResource textBoxStyle}" Text="{Binding estimated_end, 
+            <Label Grid.Column="0" Grid.Row="6"  Content="estimated end" Style="{StaticResource LabelStyle}"/>
+            <DatePicker Grid.Column="1" Grid.Row="6" Text="{Binding estimated_end, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
-            <Label Grid.Column="0" Grid.Row="6"  Content="final date" Style="{StaticResource LabelStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="6" Style="{StaticResource textBoxStyle}" Text="{Binding final_date, 
+            <Label Grid.Column="0" Grid.Row="5"  Content="final date" Style="{StaticResource LabelStyle}"/>
+            <DatePicker Grid.Column="1" Grid.Row="5" Text="{Binding final_date, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
-            <Label Grid.Column="0" Grid.Row="5"  Content="start date" Style="{StaticResource LabelStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="5" Style="{StaticResource textBoxStyle}" Text="{Binding start_date, 
+            <Label Grid.Column="0" Grid.Row="4"  Content="start date" Style="{StaticResource LabelStyle}"/>
+            <DatePicker Grid.Column="1" Grid.Row="4" Text="{Binding start_date, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
-            <Label Grid.Column="0" Grid.Row="4"  Content="production date" Style="{StaticResource LabelStyle}"/>
-            <TextBox Grid.Column="1" Grid.Row="4" Style="{StaticResource textBoxStyle}" Text="{Binding production_date, 
-                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
-
-            <Label Grid.Column="0" Grid.Row="3"  Content="milestone" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top"/>
-            <TextBox Grid.Column="1" Grid.Row="3" Style="{StaticResource textBoxStyle}" Text="{Binding milestone, 
+            <Label Grid.Column="0" Grid.Row="3"  Content="production date" Style="{StaticResource LabelStyle}"/>
+            <DatePicker Grid.Column="1" Grid.Row="3"  Text="{Binding production_date, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="2"  Content="nickname" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top"/>
@@ -115,7 +106,7 @@
 
             <Label Grid.Column="0" Grid.Row="0"  Content="task id" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top" />
             <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}" Text="{Binding task_id, 
-                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
+                Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" IsEnabled="False"/>
 
 
         </Grid>
