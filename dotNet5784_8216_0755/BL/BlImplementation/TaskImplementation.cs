@@ -1,16 +1,18 @@
-﻿
-
-using BlApi;
+﻿using BlApi;
 using BO;
 using DO;
 
 namespace BlImplementation;
 
-
-
 internal class TaskImplementation : ITask
 {
     private DalApi.IDal _dal = Factory.Get;
+
+    /// <summary>
+    /// create a task
+    /// </summary>
+    /// <param name="task">task to create</param>
+    /// <returns>id of the new task</returns>
     public int Create(BO.Task task)
     {
         try
@@ -32,6 +34,13 @@ internal class TaskImplementation : ITask
         }
 
     }
+
+    /// <summary>
+    /// delete a task
+    /// </summary>
+    /// <param name="id">id of task to delete</param>
+    /// <exception cref="BlCannotDeleteException">trying to delete a task that cannot be deleted</exception>
+    /// <exception cref="BlDoesNotExistException">trying to delete a task that does not exist</exception>
     public void Delete(int id)
     {
         try
@@ -52,6 +61,13 @@ internal class TaskImplementation : ITask
             throw new BlDoesNotExistException($"the task with id : {id} does not exist", ex);
         }
     }
+
+    /// <summary>
+    /// read a task
+    /// </summary>
+    /// <param name="id">id of task to read</param>
+    /// <returns>task</returns>
+    /// <exception cref="BlDoesNotExistException">trying to read a task that does not exist</exception>
     public BO.Task Read(int id)
     {
 
@@ -63,6 +79,11 @@ internal class TaskImplementation : ITask
 
     }
 
+    /// <summary>
+    /// read all tasks (by filter-option)
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns>all tasks</returns>
     public IEnumerable<BO.Task> ReadTasks(Func<BO.Task, bool>? filter = null)
     {
         IEnumerable<BO.Task> tasks = from task in _dal.task.ReadAll()
@@ -76,6 +97,12 @@ internal class TaskImplementation : ITask
         }
         return tasks;
     }
+
+    /// <summary>
+    /// read all tasks (by filter-option)
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns>list of main details of tasks</returns>
     public IEnumerable<BO.TaskInList> ReadMainDetailsTasks(Func<DO.Task, bool>? filter = null)
     {
         if (filter != null)
@@ -100,6 +127,11 @@ internal class TaskImplementation : ITask
                };
     }
 
+    /// <summary>
+    /// update a task
+    /// </summary>
+    /// <param name="task">updated task</param>
+    /// <exception cref="BlDoesNotExistException">trying to update a tsak that does not exist</exception>
     public void Update(BO.Task task)
     {
         try

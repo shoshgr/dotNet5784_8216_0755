@@ -13,6 +13,13 @@ static class Tools
 {
 
     public static DalApi.IDal _dal = Factory.Get;
+
+    /// <summary>
+    /// validition of task detailes
+    /// </summary>
+    /// <param name="id">task id</param>
+    /// <param name="name"> task name</param>
+    /// <exception cref="BlInvalidValueException">not valid value entered</exception>
     public static void validition(int id, string name)
     {
         if (id < 0)
@@ -20,6 +27,12 @@ static class Tools
         if (name == "")
             throw new BlInvalidValueException("nickname can not be null");
     }
+
+    /// <summary>
+    /// calculate task status
+    /// </summary>
+    /// <param name="task"></param>
+    /// <returns>the task's status</returns>
     public static BO.Status calc_status(DO.Task task)
     {
         BO.Status status = (BO.Status)(task!.production_date == DateTime.MinValue ? 0
@@ -29,6 +42,12 @@ static class Tools
         return status;
     }
    
+    /// <summary>
+    /// create all the task dependeces
+    /// </summary>
+    /// <param name="tasks">the dependent tasks of the task</param>
+    /// <param name="id">the id of the task</param>
+    /// <exception cref="BlDoesNotExistException">task does not exist</exception>
     public static void createTaskDependnce(List<TaskInList> tasks, int id)
     {
         if (tasks.Count == 0)
@@ -36,11 +55,16 @@ static class Tools
         IEnumerable<DO.Task>? is_exist = _dal!.task!.ReadAll(task => task.task_id == tasks.First().id)!;
         if (!is_exist.Any())
             throw new BlDoesNotExistException($"the task with id : {tasks.First().id} does not exist");
-
         _dal.dependence.Create(new DO.Dependence(0, id, tasks.First()!.id));
         tasks.RemoveAt(0);
         createTaskDependnce(tasks, id);
     }
+
+    /// <summary>
+    /// convert DO task to BO task
+    /// </summary>
+    /// <param name="do_task">DO task</param>
+    /// <returns>BO task</returns>
     public static BO.Task convert_to_bo(DO.Task do_task)
     {
         return new BO.Task
@@ -72,6 +96,11 @@ static class Tools
         };
     }
 
+    /// <summary>
+    /// engineer detailes validation
+    /// </summary>
+    /// <param name="engineer">engineer</param>
+    /// <exception cref="BlInvalidValueException">not valid value entered</exception>
     public static void engineer_validition(BO.Engineer engineer)
     {
         string pattern = @"^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
@@ -82,6 +111,12 @@ static class Tools
             throw new BlInvalidValueException("cost_per_hour must be positive");
         validition(engineer.engineer_id, engineer.name);
     }
+
+    /// <summary>
+    /// find task's milestone
+    /// </summary>
+    /// <param name="id">id of the task</param>
+    /// <returns>milestone</returns>
     public static MilestoneInTask find_milestone(int id)
     {
         MilestoneInTask milestoneInTask = (from d in _dal.dependence.ReadAll()
@@ -90,6 +125,12 @@ static class Tools
                                            select new MilestoneInTask { id = d.prev_task, name = _dal.task.Read(d.prev_task)!.nickname! }).FirstOrDefault()!;
         return milestoneInTask;
     }
+
+    /// <summary>
+    /// calculate task progress rate
+    /// </summary>
+    /// <param name="id">id of task</param>
+    /// <returns>progress rate</returns>
     public static float calc_ProgressRate(int id)
     {
         IEnumerable<DO.Dependence> prev_dependences = _dal.dependence.ReadAll((DO.Dependence do_dependence) => do_dependence.next_task == id)!;

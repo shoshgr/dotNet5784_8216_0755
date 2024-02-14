@@ -1,6 +1,4 @@
-﻿
-
-using BlApi;
+﻿using BlApi;
 using BO;
 using System.Collections.Generic;
 using System.Runtime.Intrinsics.Arm;
@@ -9,9 +7,12 @@ namespace BlImplementation;
 internal class MilestoneImplementation : IMilestone
 {
     private DalApi.IDal _dal = Factory.Get;
-
    
-   
+    /// <summary>
+    /// convert task to milestone
+    /// </summary>
+    /// <param name="milestone">task to convert</param>
+    /// <returns>converted task</returns>
     private Milestone convert_to_milestone(DO.Task milestone)
     {
         IEnumerable<TaskInList> list = from dep in _dal.dependence.ReadAll()!
@@ -39,6 +40,12 @@ internal class MilestoneImplementation : IMilestone
         throw new NotImplementedException();
     }
 
+    /// <summary>
+    /// read a milestone by id
+    /// </summary>
+    /// <param name="id">id of milestone to read</param>
+    /// <returns>milstone</returns>
+    /// <exception cref="NotImplementedException">milestone was not found</exception>
     public Milestone Read(int id)
     {
         DO.Task? milestone = _dal.task.Read(id);
@@ -54,6 +61,12 @@ internal class MilestoneImplementation : IMilestone
 
     }
 
+    /// <summary>
+    /// update a milestone
+    /// </summary>
+    /// <param name="id">id of milstone to update</param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException">milestone was not found</exception>
     public Milestone Update(int id)
     {
         DO.Task? milestone = _dal.task.Read(id);

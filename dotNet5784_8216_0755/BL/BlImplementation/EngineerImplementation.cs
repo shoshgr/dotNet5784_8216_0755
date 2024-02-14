@@ -9,11 +9,17 @@ namespace BlImplementation;
 internal class EngineerImplementation : IEngineer
 {
     private DalApi.IDal _dal = Factory.Get;
-   
-   
+
+    /// <summary>
+    /// create new engineer
+    /// </summary>
+    /// <param name="engineer"></param>
+    /// <returns>id of the new engineer</returns>
+    /// <exception cref="BlAlreadyExistsNotActiveException">
+    ///            exception for creating an engineer that already exist but not not active</exception>
+    /// <exception cref="BlAlreadyExistsException">exception for creating an engineer that already exist</exception>
     public int Create(BO.Engineer engineer)
-    {
-        
+    {        
         try
         {
             Tools.engineer_validition(engineer);
@@ -34,7 +40,12 @@ internal class EngineerImplementation : IEngineer
         }
     }
 
-
+    /// <summary>
+    /// delete an engineer
+    /// </summary>
+    /// <param name="id">id of engineer to delete</param>
+    /// <exception cref="BlCannotDeleteException">trying to delete engineer that have a task</exception>
+    /// <exception cref="BlDoesNotExistException">trying to delete engineer that does not exist</exception>
     public void Delete(int id)
     {
         try
@@ -48,8 +59,6 @@ internal class EngineerImplementation : IEngineer
                 throw new BlCannotDeleteException("can not delete engineer that has task ");
             else
                 _dal.engineer!.Delete(id);
-            ///לא לאפשר מחיקת מהנדס שסיים עכשיו משימה 
-
         }
         catch (DalDoesNotExistException e)
         {
@@ -59,6 +68,12 @@ internal class EngineerImplementation : IEngineer
 
     }
 
+    /// <summary>
+    /// read an engineer by id
+    /// </summary>
+    /// <param name="id">id of engineer to read</param>
+    /// <returns>engineer</returns>
+    /// <exception cref="BlDoesNotExistException">trying to read an engineer that does not exist</exception>
     public BO.Engineer Read(int id)
     {
        
@@ -81,9 +96,13 @@ internal class EngineerImplementation : IEngineer
        
     }
 
+    /// <summary>
+    /// read all engineers (by filter-option)
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns>list of engineers</returns>
     public IEnumerable<BO.Engineer> ReadEngineers(Func<BO.Engineer, bool>? filter = null)
     {
-       // IEnumerable<DO.Engineer> do_engineers = _dal.engineer.ReadAll()!;
         IEnumerable<BO.Engineer> bo_engineers = from engineer in _dal.engineer.ReadAll()!
                                                 let task = _dal.task.Read(task => task.engineer == engineer.engineer_id)
                                       select new BO.Engineer()
@@ -105,6 +124,12 @@ internal class EngineerImplementation : IEngineer
         return bo_engineers;
 
     }
+
+    /// <summary>
+    /// read all engineers (by filter-option)
+    /// </summary>
+    /// <param name="filter"></param>
+    /// <returns>list of main details of engineers</returns>
     public IEnumerable<BO.EngineerMainDetails> ReadMainDetailsEngineers(Func<DO.Engineer, bool>? filter = null)
     {
        
@@ -130,20 +155,18 @@ internal class EngineerImplementation : IEngineer
                    name = engineer.name,
                    id = engineer.engineer_id
 
-               };
-
-        
-
+               };     
     }
 
+    /// <summary>
+    /// update an engineer
+    /// </summary>
+    /// <param name="engineer">updated engineer</param>
+    /// <exception cref="BlDoesNotExistException">trying to update an engineer that does not exist</exception>
     public void Update(BO.Engineer engineer)
     {
         try
-        {
-          
-            //DO.Engineer? is_exist = _dal.engineer.Read(engineer.engineer_id);
-            //if (is_exist == null)
-            //    throw new NotImplementedException();
+        {          
             _dal.engineer.Update(new DO.Engineer(engineer.engineer_id, engineer.name, engineer.email, (DO.Level)engineer.degree, engineer.cost_per_hour,engineer.is_active));
         }
         catch (DalDoesNotExistException e)
