@@ -29,11 +29,10 @@ namespace PL.Engineer
         private static readonly BlApi.IBl s_bl = BlApi.Factory.Get();
         public EngineerWindow(int id = 1)
         {
-            id_= id;
+            id_ = id;
             InitializeComponent();
-            curEngineer = (id == 0) ? new BO.Engineer {engineer_id= 0,name= "",email= "",degree= BO.Level.None,cost_per_hour=0 ,is_active= false,task= null }:
-                s_bl.Engineer.Read(id) ;
-            
+            curEngineer = (id == 0) ? new BO.Engineer { engineer_id = 0, name = "", email = "", degree = BO.Level.None, cost_per_hour = 0, is_active = false, task = null } :
+                s_bl.Engineer.Read(id);
         }
         public BO.Engineer curEngineer
         {
@@ -43,9 +42,14 @@ namespace PL.Engineer
         public static readonly DependencyProperty curEngineerProperty =
         DependencyProperty.Register("curEngineer", typeof(BO.Engineer),
         typeof(EngineerWindow), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Update\add an engineer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_update_button_click(object sender, RoutedEventArgs e)
         {
-           
             try
             {
                 if (id_ == 0)
@@ -67,14 +71,15 @@ namespace PL.Engineer
                 }
 
                 this.Close();
-                
+
             }
-            catch(BlDoesNotExistException ex) {
+            catch (BlDoesNotExistException ex)
+            {
                 MessageBox.Show(ex.Message,
             "error",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
-                
+
             }
             catch (DalAlreadyExistsNotActiveException ex)
             {
@@ -100,16 +105,14 @@ namespace PL.Engineer
                 MessageBoxImage.Error);
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message,
            "error",
                MessageBoxButton.OK,
                MessageBoxImage.Error);
             }
-            
-        }
 
-        
+        }
     }
 }

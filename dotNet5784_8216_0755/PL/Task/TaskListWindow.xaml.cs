@@ -30,17 +30,24 @@ namespace PL.Task
         DependencyProperty.Register("TaskList", typeof(ObservableCollection<BO.TaskInList>),
         typeof(TaskListWindow), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// sorting the tasks by level selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Level_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-
             var temp = levels == BO.Level.None ?
             s_bl?.Task.ReadMainDetailsTasks() :
             s_bl?.Task.ReadMainDetailsTasks(item => (BO.Level)item.level == levels);
             TaskList = temp == null ? new() : new(temp);
-
         }
 
+        /// <summary>
+        /// open adding task window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_task_btn_click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -49,6 +56,12 @@ namespace PL.Task
             var temp = s_bl?.Task.ReadMainDetailsTasks();
             TaskList = temp == null ? new() : new(temp);
         }
+
+        /// <summary>
+        /// open updating task window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void update_task(object sender, RoutedEventArgs e)
         {
             BO.TaskInList? Task = (sender as ListView)?.SelectedItem as BO.TaskInList;

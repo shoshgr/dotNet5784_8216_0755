@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="276" Width="545">
+    
     <Window.Resources>
         <!--button style definition-->
         <Style x:Key="ButtonStyle" TargetType="Button">
@@ -29,7 +30,6 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value="LightPink"/>
                 </Trigger>
@@ -37,22 +37,29 @@
         </Style>
     </Window.Resources>
 
-    <Grid  Background="#FFD1D1D1">
+    <!--Extrnal Grid-->
+    <Grid Background="#FFD1D1D1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+        
+        <!--show tasks button-->
         <Button Grid.Column="0" Style="{StaticResource ButtonStyle}"   Content="show tasks"    Click="BtnTasks_Click" RenderTransformOrigin="0.903,1.12">
             <Button.BorderBrush>
                 <ImageBrush/>
             </Button.BorderBrush>
         </Button>
+
+        <!--show engineers button-->
         <Button Grid.Column="1" Style="{StaticResource ButtonStyle}"   Content="show engineers"    Click="BtnEngineers_Click" RenderTransformOrigin="0.903,1.12">
             <Button.BorderBrush>
                 <ImageBrush/>
             </Button.BorderBrush>
         </Button>
+
+        <!--initialize data button-->
         <Button Grid.Column="2" Style="{StaticResource ButtonStyle}" Content="initialize data"  Click="BtnInitialization_Click" >
             <Button.BorderBrush>
                 <ImageBrush/>

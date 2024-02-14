@@ -32,7 +32,11 @@ namespace PL.Engineer
         DependencyProperty.Register("EngineerList", typeof(ObservableCollection<BO.EngineerMainDetails>),
         typeof(EngineerListWindow), new PropertyMetadata(null));
 
-
+        /// <summary>
+        /// sorting the engineers by level selection
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Level_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
             var temp = levels == BO.Level.None ?
@@ -41,6 +45,11 @@ namespace PL.Engineer
             EngineerList = temp == null ? new() : new(temp);
         }
 
+        /// <summary>
+        /// open adding engineer window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_engineer_btn_click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
@@ -49,6 +58,12 @@ namespace PL.Engineer
             var temp = s_bl?.Engineer.ReadMainDetailsEngineers();
             EngineerList = temp == null ? new() : new(temp);
         }
+
+        /// <summary>
+        /// open updating current engineer window 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void update_engineer(object sender, RoutedEventArgs e)
         {
             BO.EngineerMainDetails? Engineer = (sender as ListView)?.SelectedItem as BO.EngineerMainDetails;

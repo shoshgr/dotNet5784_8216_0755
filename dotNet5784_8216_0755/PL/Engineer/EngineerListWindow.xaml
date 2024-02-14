@@ -30,6 +30,7 @@
                 <ComboBox  Background="#FFD1D1D1" Grid.Column="1" HorizontalAlignment="Stretch"
                            VerticalAlignment="Stretch" SelectedValue="{Binding levels, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="Level_SelectionChanged"  />
             </Grid>
+            <!--List of engineers-->
             <ListView Grid.Row="1" MouseDoubleClick="update_engineer"  ItemsSource = "{Binding  EngineerList }" Background="#FFAEF9DE" BorderBrush="#FF03F7C2"  >
                 <ListView.View>
                     <GridView >
@@ -39,6 +40,7 @@
                 </ListView.View>
             </ListView>
         </Grid>
+        <!--Add new engineer button-->
         <Button Background="#FFD1D1D1" Content="Add" Grid.Row="1" HorizontalAlignment="Stretch" FontSize="20"  VerticalAlignment="Stretch" Click="add_engineer_btn_click" />
     </Grid>
 </Window>

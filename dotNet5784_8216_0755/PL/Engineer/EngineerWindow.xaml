@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="EngineerWindow" Height="450" Width="800"
         DataContext="{Binding curEngineer, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    
     <Window.Resources>
         <!--button style definition-->
         <Style x:Key="LabelStyle" TargetType="Label">
@@ -16,6 +17,7 @@
             <Setter Property="Height" Value="44"/>
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
+        <!--textBox style dfinition-->
         <Style x:Key="textBoxStyle" TargetType="TextBox">
             <Setter Property="Background"  Value="#FFAEF9DE"/>
             <Setter Property="FontSize" Value="15"/>
@@ -27,14 +29,16 @@
             <Setter Property="FontStyle" Value="Italic"/>
             <Setter Property="Margin" Value="10"/>
         </Style>
-
     </Window.Resources>
-
+    
+    <!--Extrnal Grid-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+        
+        <!--Internal, Upper Grid-->
         <Grid  Background="#FFD1D1D1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -49,34 +53,35 @@
                 <ColumnDefinition Width="237*"/>
                 <ColumnDefinition Width="563*"/>
             </Grid.ColumnDefinitions>
+            
             <Label Grid.Column="0" Grid.Row="6"  Content="current task" Style="{StaticResource LabelStyle}"/>
             <TextBox Grid.Column="1" Grid.Row="6" Margin="284,0,0,0" Style="{StaticResource textBoxStyle}" Text="{Binding task.nickname}" IsEnabled="False"/>
             <TextBox Grid.Row="6" Margin="0,0,284,0"  Grid.Column="1" Style="{StaticResource textBoxStyle}" Text="{Binding task.task_id}" IsEnabled="False"/>
+            
             <Label Grid.Column="0" Grid.Row="5"  Content="is active" Style="{StaticResource LabelStyle}" />
             <CheckBox Background="#FFAEF9DE" Grid.Column="1"  HorizontalAlignment="Left" IsChecked="{Binding is_active}" Margin="180,10,0,0" Grid.Row="5" VerticalAlignment="Center" Height="20" Width="30"/>
+            
             <Label Grid.Column="0" Grid.Row="4"  Content="cost per hour" Style="{StaticResource LabelStyle}"/>
             <TextBox Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="4"  Text="{Binding cost_per_hour, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="3"  Content="degree" Style="{StaticResource LabelStyle}"/>
-
             <ComboBox Grid.Column="1" HorizontalAlignment="Left" Background="#FFAEF9DE"  Grid.Row="3" VerticalAlignment="Center" Width="250" Height="30" 
                       ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectedValue="{Binding degree, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"  Margin="146,0,0,0"/>
+            
             <Label Grid.Column="0" Grid.Row="2"  Content="email" Style="{StaticResource LabelStyle}"/>
-
             <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="2"  Text="{Binding email, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"/>
+            
             <Label Grid.Column="0" Grid.Row="1"  Content="name" Style="{StaticResource LabelStyle}"/>
-
             <TextBox Style="{StaticResource textBoxStyle}" Grid.Row="1"  Grid.Column="1" Text="{Binding name, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"  />
+            
             <Label Grid.Column="0" Grid.Row="0"  Content="id" Style="{StaticResource LabelStyle}"/>
-
             <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}" Text="{Binding engineer_id, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" IsEnabled="{Binding engineer_id, Mode=OneTime, Converter={StaticResource convertIdToBool}}" />
-
-
         </Grid>
+        <!--Adding\updating engineer button-->
         <Button Background="#FFAEF9DE" FontSize="15" FontStyle="Italic" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" Click="add_update_button_click" Content="{Binding engineer_id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"/>
     </Grid>
 </Window>

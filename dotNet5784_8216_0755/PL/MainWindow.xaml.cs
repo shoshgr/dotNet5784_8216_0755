@@ -27,12 +27,21 @@ namespace PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// open engineers list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnEngineers_Click(object sender, RoutedEventArgs e)
         {
-
             new EngineerListWindow().Show();
         }
 
+        /// <summary>
+        /// initialize data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnInitialization_Click(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Do you want to initialize the data source?",
@@ -44,10 +53,14 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// open task list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BtnTasks_Click(object sender, RoutedEventArgs e)
         {
             new TaskListWindow().Show();
-
         }
     }
 }

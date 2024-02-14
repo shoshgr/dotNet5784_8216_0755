@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="TaskWindow" Height="450" Width="800"
     DataContext="{Binding curTask, RelativeSource={RelativeSource Self}, Mode=TwoWay}">
+    
     <Window.Resources>
         <!--button style definition-->
         <Style x:Key="LabelStyle" TargetType="Label">
@@ -16,6 +17,7 @@
 
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
+        <!--TextBox style definition-->
         <Style x:Key="textBoxStyle" TargetType="TextBox">
             <Setter Property="Background"  Value="#FFAEF9DE"/>
             <Setter Property="FontSize" Value="15"/>
@@ -26,14 +28,16 @@
             <Setter Property="Width" Value="500" />
             <Setter Property="FontStyle" Value="Italic"/>
         </Style>
-
     </Window.Resources>
 
+    <!--Extrnal Grid-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
+        
+        <!--Internal, Upper Grid-->
         <Grid  Background="#FFD1D1D1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -107,9 +111,9 @@
             <Label Grid.Column="0" Grid.Row="0"  Content="task id" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top" />
             <TextBox Grid.Column="1" Grid.Row="0" Style="{StaticResource textBoxStyle}" Text="{Binding task_id, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" IsEnabled="False"/>
-
-
         </Grid>
+        
+        <!--Adding\updating task button-->
         <Button Background="#FFAEF9DE" FontSize="15" FontStyle="Italic" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" Click="add_update_button_click" Content="{Binding task_id, Mode=OneTime, Converter={StaticResource ConverIdToContentKey}}"/>
     </Grid>
 </Window>

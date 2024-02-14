@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
-
 using System.Windows.Data;
 
 namespace PL;
 
+/// <summary>
+/// convert the id to its content
+/// </summary>
 class ConvertIdToContent : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -21,6 +23,10 @@ class ConvertIdToContent : IValueConverter
     }
    
 }
+
+/// <summary>
+/// convert the id to boolean value
+/// </summary>
 class convertIdToBool : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

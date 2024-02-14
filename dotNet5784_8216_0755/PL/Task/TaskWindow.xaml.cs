@@ -60,9 +60,14 @@ namespace PL.Task
         public static readonly DependencyProperty curTaskProperty =
         DependencyProperty.Register("curTask", typeof(BO.Task),
         typeof(TaskWindow), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Update\add a task
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void add_update_button_click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 if (id_ == 0)
@@ -118,7 +123,5 @@ namespace PL.Task
                MessageBoxImage.Error);
             }
         }
-
-
     }
 }
