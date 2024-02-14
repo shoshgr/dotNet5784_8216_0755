@@ -56,12 +56,12 @@ static class Tools
             actual_end = do_task.actual_end,
             product = do_task.product,
             remarks = do_task.remarks,
-            engineer = do_task.engineer==null?null: new EngineerMainDetails { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
+            engineer = do_task.engineer == null ? null : new EngineerMainDetails { id = (int)do_task.engineer!, name = _dal.engineer.Read((int)do_task.engineer)!.name },
             level = (BO.Level)do_task.level,
             tasks_list = (List<TaskInList>)(from dep in _dal!.dependence!.ReadAll()
                                             where (dep.next_task == do_task.task_id)
                                             let task = _dal.task.Read(dep.prev_task)
-                                            select new TaskInList
+                                            select task == null ?null: new TaskInList
                                             {
                                                 id = do_task.task_id,
                                                 nickname = task.nickname,
@@ -86,7 +86,7 @@ static class Tools
     {
         MilestoneInTask milestoneInTask = (from d in _dal.dependence.ReadAll()
                                            let next_task = d.next_task
-                                           where next_task == id && (_dal.task.Read(d.prev_task)!.milestone == true)
+                                           where next_task == id && (_dal.task.Read(d.prev_task) != null) && (_dal.task.Read(d.prev_task)!.milestone == true)
                                            select new MilestoneInTask { id = d.prev_task, name = _dal.task.Read(d.prev_task)!.nickname! }).FirstOrDefault()!;
         return milestoneInTask;
     }

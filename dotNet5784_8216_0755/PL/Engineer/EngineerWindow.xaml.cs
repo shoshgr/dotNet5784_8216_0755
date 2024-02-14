@@ -100,6 +100,13 @@ namespace PL.Engineer
                 MessageBoxImage.Error);
 
             }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message,
+           "error",
+               MessageBoxButton.OK,
+               MessageBoxImage.Error);
+            }
             
         }
 

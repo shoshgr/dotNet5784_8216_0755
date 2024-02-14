@@ -6,44 +6,38 @@
         xmlns:local="clr-namespace:PL.Engineer"
         mc:Ignorable="d"
         Title="EngineerListWindow" Height="640" Width="800" 
-        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}"
-         
->
+        DataContext="{Binding RelativeSource={RelativeSource Mode=Self}}">
 
     <!--Extrnal Grid-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="90*"/>
             <RowDefinition Height="10*"/>
-            
         </Grid.RowDefinitions>
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="73*"/>
-            <ColumnDefinition Width="7*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40*"/>
-            <RowDefinition Height="500*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <!--Internal, Upper Grid-->
-        <Grid Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-                <Label  Background="#FFD1D1D1" Content="degree" Grid.Column="0"  HorizontalAlignment="Left" FontSize="17" FontStyle="Italic" Width="400" Grid.ColumnSpan="2" Margin="170,0,0,0" />
-                <ComboBox  Background="#FFD1D1D1" Grid.Column="1" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch" SelectedValue="{Binding levels, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="Level_SelectionChanged"  />
-        </Grid>
-        <ListView   Grid.Row="1" MouseDoubleClick="update_engineer"  Margin="5,5,5,5" ItemsSource = "{Binding  EngineerList }" Grid.ColumnSpan="2" Background="#FFAEF9DE" BorderBrush="#FF03F7C2"  >
-            <ListView.View>
-                <GridView >
-                    <GridViewColumn Width="200"  Header="id" DisplayMemberBinding ="{Binding id}"/>
-                    <GridViewColumn  Width="200"    Header="name" DisplayMemberBinding ="{Binding name}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40*"/>
+                <RowDefinition Height="500*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!--Internal, Upper Grid-->
+            <Grid Height="auto" Grid.Row="0" Width="auto" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label  Background="#FFD1D1D1" Content="degree" Grid.Column="0"  HorizontalAlignment="Left" FontSize="17" FontStyle="Italic" Width="400" Grid.ColumnSpan="2" Margin="170,0,0,0"  />
+                <ComboBox  Background="#FFD1D1D1" Grid.Column="1" HorizontalAlignment="Stretch"
+                           VerticalAlignment="Stretch" SelectedValue="{Binding levels, Mode=TwoWay}" ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectionChanged="Level_SelectionChanged"  />
+            </Grid>
+            <ListView Grid.Row="1" MouseDoubleClick="update_engineer"  ItemsSource = "{Binding  EngineerList }" Background="#FFAEF9DE" BorderBrush="#FF03F7C2"  >
+                <ListView.View>
+                    <GridView >
+                        <GridViewColumn Width="200"  Header="id" DisplayMemberBinding ="{Binding id}"/>
+                        <GridViewColumn  Width="200"    Header="name" DisplayMemberBinding ="{Binding name}"/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
         <Button Background="#FFD1D1D1" Content="Add" Grid.Row="1" HorizontalAlignment="Stretch" FontSize="20"  VerticalAlignment="Stretch" Click="add_engineer_btn_click" />
     </Grid>

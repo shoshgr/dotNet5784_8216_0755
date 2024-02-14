@@ -64,8 +64,8 @@
                       ItemsSource="{Binding Source={StaticResource LevelCollection}}" SelectedValue="{Binding level, Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true}"  Margin="146,0,0,0"/>
 
 
-            <Label Grid.Column="0" Grid.Row="10"  Content="engineer" Style="{StaticResource LabelStyle}"/>
-            <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="10"  Text="{Binding engineer, 
+            <Label Grid.Column="0" Grid.Row="10"  Content="engineer id" Style="{StaticResource LabelStyle}"/>
+            <TextBox  Style="{StaticResource textBoxStyle}" Grid.Column="1" Grid.Row="10"  Text="{Binding engineer.id, 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }"/>
 
             <Label Grid.Column="0" Grid.Row="9"  Content="remarks" Style="{StaticResource LabelStyle}"/>
@@ -77,23 +77,23 @@
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="7"  Content="actual end" Style="{StaticResource LabelStyle}"/>
-            <DatePicker Grid.Column="1" Grid.Row="7" Text="{Binding actual_end, 
+            <DatePicker Grid.Column="1" Grid.Row="7" SelectedDate="{Binding actual_end,StringFormat='dd/MM/yyyy', 
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="6"  Content="estimated end" Style="{StaticResource LabelStyle}"/>
-            <DatePicker Grid.Column="1" Grid.Row="6" Text="{Binding estimated_end, 
+            <DatePicker Grid.Column="1" Grid.Row="6" SelectedDate="{Binding estimated_end, StringFormat='dd/MM/yyyy',
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="5"  Content="final date" Style="{StaticResource LabelStyle}"/>
-            <DatePicker Grid.Column="1" Grid.Row="5" Text="{Binding final_date, 
+            <DatePicker Grid.Column="1" Grid.Row="5" SelectedDate="{Binding final_date, StringFormat='dd/MM/yyyy',
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="4"  Content="start date" Style="{StaticResource LabelStyle}"/>
-            <DatePicker Grid.Column="1" Grid.Row="4" Text="{Binding start_date, 
+            <DatePicker Grid.Column="1" Grid.Row="4" SelectedDate="{Binding start_date, StringFormat='dd/MM/yyyy',
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="3"  Content="production date" Style="{StaticResource LabelStyle}"/>
-            <DatePicker Grid.Column="1" Grid.Row="3"  Text="{Binding production_date, 
+            <DatePicker Grid.Column="1" Grid.Row="3"  SelectedDate="{Binding production_date, StringFormat='dd/MM/yyyy',
                 Mode=TwoWay, NotifyOnValidationError=true,ValidatesOnExceptions=true }" />
 
             <Label Grid.Column="0" Grid.Row="2"  Content="nickname" Style="{StaticResource LabelStyle}"  VerticalAlignment="Top"/>
