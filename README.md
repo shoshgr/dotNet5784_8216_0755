@@ -19,3 +19,5 @@ This software was developed to help engineering firms efficiently manage their w
 - **Design Patterns**: Used patterns like Repository, Singleton, and MVVM  
 - **Data Structures**: Implemented diverse data structures for optimized performance  
 
+## Description :
+Management tool for engineering teams to handle schedules, tasks, and goals, built in C# with WPF, following SOLID principles and design patterns like MVVM and Repository.Management tool for engineering teams to handle schedules, tasks, and goals, built in C# with WPF, following SOLID principles and design patterns like MVVM and Repository.
